@@ -14,7 +14,7 @@ object FrmParent: TFrmParent
   object Label1: TLabel
     Left = 48
     Top = 19
-    Width = 857
+    Width = 112
     Height = 30
     Alignment = taCenter
     Caption = #915' '#927' '#925' '#917' '#913' '#931
@@ -49,18 +49,32 @@ object FrmParent: TFrmParent
     Caption = #917#960#940#947#947#949#955#956#945
   end
   object Label5: TLabel
-    Left = 512
-    Top = 328
+    Left = 536
+    Top = 390
     Width = 31
     Height = 17
     Caption = 'email'
   end
   object Label6: TLabel
-    Left = 512
+    Left = 51
     Top = 395
+    Width = 78
+    Height = 17
+    Caption = #932#951#955#941#966#969#957#959
+  end
+  object Label7: TLabel
+    Left = 292
+    Top = 390
     Width = 61
     Height = 17
     Caption = #932#951#955#941#966#969#957#959
+  end
+  object Label8: TLabel
+    Left = 536
+    Top = 328
+    Width = 29
+    Height = 17
+    Caption = #913#934#924
   end
   object DBEdit1: TDBEdit
     Left = 144
@@ -130,7 +144,17 @@ object FrmParent: TFrmParent
       end
       item
         Expanded = False
+        FieldName = 'afm'
+        Visible = True
+      end
+      item
+        Expanded = False
         FieldName = 'phone'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'phone2'
         Visible = True
       end
       item
@@ -151,7 +175,7 @@ object FrmParent: TFrmParent
   end
   object DBEdit3: TDBEdit
     Left = 623
-    Top = 325
+    Top = 387
     Width = 121
     Height = 25
     DataField = 'email'
@@ -159,13 +183,31 @@ object FrmParent: TFrmParent
     TabOrder = 5
   end
   object DBEdit4: TDBEdit
-    Left = 623
-    Top = 392
+    Left = 144
+    Top = 387
     Width = 121
     Height = 25
     DataField = 'phone'
     DataSource = DataSource1
     TabOrder = 6
+  end
+  object DBEdit5: TDBEdit
+    Left = 368
+    Top = 387
+    Width = 121
+    Height = 25
+    DataField = 'phone2'
+    DataSource = DataSource1
+    TabOrder = 7
+  end
+  object DBEdit6: TDBEdit
+    Left = 623
+    Top = 325
+    Width = 121
+    Height = 25
+    DataField = 'afm'
+    DataSource = DataSource1
+    TabOrder = 8
   end
   object FDConnection1: TFDConnection
     Params.Strings = (

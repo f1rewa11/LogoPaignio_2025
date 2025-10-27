@@ -32,6 +32,10 @@ type
     Label5: TLabel;
     Label6: TLabel;
     DBEdit4: TDBEdit;
+    Label7: TLabel;
+    DBEdit5: TDBEdit;
+    Label8: TLabel;
+    DBEdit6: TDBEdit;
 
   private
     { Private declarations }
