@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   logopaignio in 'logopaignio.pas' {Form1},
   teachers in 'teachers.pas' {FrmTeachers},
-  kids in 'kids.pas' {frmKids},
+  programday in 'programday.pas' {frmProgramDay},
   parent in 'parent.pas' {FrmParent};
 
 {$R *.res}
@@ -14,7 +14,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TFrmTeachers, FrmTeachers);
-  Application.CreateForm(TfrmKids, frmKids);
+  Application.CreateForm(TfrmProgramDay, frmProgramDay);
   Application.CreateForm(TFrmParent, FrmParent);
   Application.Run;
 end.

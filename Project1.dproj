@@ -131,8 +131,8 @@
             <Form>FrmTeachers</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="kids.pas">
-            <Form>frmKids</Form>
+        <DCCReference Include="programday.pas">
+            <Form>frmProgramDay</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="parent.pas">
