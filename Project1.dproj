@@ -131,6 +131,10 @@
             <Form>FrmTeachers</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="kids.pas">
+            <Form>frmKids</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <DCCReference Include="parent.pas">
             <Form>FrmParent</Form>
             <FormType>dfm</FormType>

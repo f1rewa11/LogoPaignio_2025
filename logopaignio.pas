@@ -19,6 +19,7 @@ type
     ToolBar1: TToolBar;
     procedure N3Click(Sender: TObject);
     procedure N6Click(Sender: TObject);
+    procedure N5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,11 +33,16 @@ implementation
 
 {$R *.dfm}
 
-uses teachers, parent;
+uses teachers, parent, kids;
 
 procedure TForm1.N3Click(Sender: TObject);
 begin
  frmTeachers.Show;
+end;
+
+procedure TForm1.N5Click(Sender: TObject);
+begin
+  frmKids.show;
 end;
 
 procedure TForm1.N6Click(Sender: TObject);
