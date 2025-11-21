@@ -5,7 +5,8 @@ uses
   logopaignio in 'logopaignio.pas' {Form1},
   teachers in 'teachers.pas' {FrmTeachers},
   programday in 'programday.pas' {frmProgramDay},
-  parent in 'parent.pas' {FrmParent};
+  parent in 'parent.pas' {FrmParent},
+  kids in 'kids.pas' {frmKids};
 
 {$R *.res}
 
@@ -16,5 +17,6 @@ begin
   Application.CreateForm(TFrmTeachers, FrmTeachers);
   Application.CreateForm(TfrmProgramDay, frmProgramDay);
   Application.CreateForm(TFrmParent, FrmParent);
+  Application.CreateForm(TfrmKids, frmKids);
   Application.Run;
 end.

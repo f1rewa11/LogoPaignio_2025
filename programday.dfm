@@ -27,58 +27,33 @@ object frmProgramDay: TfrmProgramDay
     ParentColor = False
     ParentFont = False
   end
-  object Label2: TLabel
-    Left = 392
-    Top = 267
-    Width = 55
-    Height = 17
-    Caption = #917#960#974#957#965#956#959
-  end
   object Label3: TLabel
     Left = 48
-    Top = 267
-    Width = 40
+    Top = 259
+    Width = 72
     Height = 17
-    Caption = #908#957#959#956#945
+    Caption = #920#949#961#945#960#949#965#964#942#962
   end
   object Label4: TLabel
-    Left = 24
-    Top = 328
-    Width = 95
+    Left = 48
+    Top = 304
+    Width = 31
     Height = 17
-    Caption = #917#960#974#957#965#956#959' '#947#959#957#941#945
+    Caption = #928#945#953#948#943
   end
   object Label8: TLabel
     Left = 618
-    Top = 328
-    Width = 76
+    Top = 304
+    Width = 70
     Height = 17
-    Caption = #919#956'. '#915#941#957#957#951#963#951#962
+    Caption = #919#956#949#961#959#956#951#957#943#945
   end
   object Label9: TLabel
-    Left = 704
-    Top = 267
-    Width = 36
+    Left = 618
+    Top = 259
+    Width = 27
     Height = 17
-    Caption = #913#924#922#913
-  end
-  object DBEdit1: TDBEdit
-    Left = 144
-    Top = 264
-    Width = 185
-    Height = 25
-    DataField = 'fistname'
-    DataSource = DataSource1
-    TabOrder = 0
-  end
-  object DBEdit2: TDBEdit
-    Left = 471
-    Top = 264
-    Width = 185
-    Height = 25
-    DataField = 'lastname'
-    DataSource = DataSource1
-    TabOrder = 1
+    Caption = #911#961#945
   end
   object DBNavigator1: TDBNavigator
     Left = 48
@@ -86,19 +61,19 @@ object frmProgramDay: TfrmProgramDay
     Width = 850
     Height = 25
     DataSource = DataSource1
-    TabOrder = 2
+    TabOrder = 0
   end
   object DBLookupComboBox1: TDBLookupComboBox
-    Left = 144
-    Top = 328
+    Left = 138
+    Top = 304
     Width = 209
     Height = 25
-    DataField = 'parent_id'
+    DataField = 'kids_id'
     DataSource = DataSource1
     KeyField = 'id'
-    ListField = 'lastname'
-    ListSource = DataSourceParent
-    TabOrder = 3
+    ListField = 'FullName'
+    ListSource = DataSourceKid
+    TabOrder = 1
   end
   object DBGrid1: TDBGrid
     Left = 48
@@ -106,7 +81,7 @@ object frmProgramDay: TfrmProgramDay
     Width = 857
     Height = 186
     DataSource = DataSource1
-    TabOrder = 4
+    TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -13
@@ -120,121 +95,122 @@ object frmProgramDay: TfrmProgramDay
       end
       item
         Expanded = False
-        FieldName = 'parent_id'
+        FieldName = 'Imerominia'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'fistname'
+        FieldName = 'ora'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'lastname'
+        FieldName = 'kids_id'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'amka'
+        FieldName = 'teachers_id'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'gnomateysi'
+        FieldName = 'Therapeutis_name'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'birthdate'
+        FieldName = 'Paidi_Eponymo_name'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ergo'
+        FieldName = 'Xreosi'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'cyxo'
+        FieldName = 'Xreosi2'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'logo'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ParentName'
+        FieldName = 'absence'
         Visible = True
       end>
   end
-  object DBCheckBox1: TDBCheckBox
+  object DBLookupComboBox2: TDBLookupComboBox
     Left = 138
-    Top = 391
-    Width = 97
-    Height = 17
-    Caption = #904#961#947#959
-    DataField = 'ergo'
+    Top = 259
+    Width = 209
+    Height = 25
+    DataField = 'teachers_id'
     DataSource = DataSource1
+    KeyField = 'id'
+    ListField = 'FullNameTeacher'
+    ListSource = DataSourceTeacher
+    TabOrder = 3
+  end
+  object DBCheckBox4: TDBCheckBox
+    Left = 304
+    Top = 373
+    Width = 177
+    Height = 17
+    Caption = '  '#913#954#965#961#974#952#951#954#949' '#956#949' '#967#961#941#969#963#951
+    DataField = 'Xreosi'
+    DataSource = DataSource1
+    TabOrder = 4
+    ValueChecked = '1'
+    ValueUnchecked = '0'
+    OnClick = DBCheckBox4Click
+  end
+  object DateTimePicker2: TDateTimePicker
+    Left = 712
+    Top = 259
+    Width = 186
+    Height = 25
+    Date = 45968.000000000000000000
+    Format = 'hh:mm'
+    Time = 0.636714594904333400
+    Kind = dtkTime
     TabOrder = 5
-    ValueChecked = '1'
-    ValueUnchecked = '0'
+    OnChange = DateTimePicker2Change
   end
-  object DBCheckBox2: TDBCheckBox
-    Left = 392
-    Top = 391
-    Width = 97
-    Height = 17
-    Caption = #923#972#947#959
-    DataField = 'logo'
-    DataSource = DataSource1
+  object DateTimePicker1: TDateTimePicker
+    Left = 712
+    Top = 304
+    Width = 186
+    Height = 25
+    Date = 45981.000000000000000000
+    Time = 0.640056898148031900
     TabOrder = 6
-    ValueChecked = '1'
-    ValueUnchecked = '0'
+    OnChange = DateTimePicker1Change
   end
-  object DBCheckBox3: TDBCheckBox
+  object DBCheckBox1: TDBCheckBox
     Left = 618
-    Top = 391
-    Width = 97
+    Top = 373
+    Width = 225
     Height = 17
-    Caption = #936#973#967#959
-    DataField = 'cyxo'
+    Caption = '  '#913#954#965#961#974#952#951#954#949' '#956#949' '#956#953#963#942' '#967#961#941#969#963#951
+    DataField = 'Xreosi2'
     DataSource = DataSource1
     TabOrder = 7
     ValueChecked = '1'
     ValueUnchecked = '0'
+    OnClick = DBCheckBox1Click
   end
-  object DateTimePicker1: TDateTimePicker
-    Left = 712
-    Top = 320
-    Width = 186
-    Height = 25
-    Date = 45968.000000000000000000
-    Time = 0.636714594904333400
-    TabOrder = 8
-    OnChange = DateTimePicker1Change
-    OnDropDown = DateTimePicker1DropDown
-  end
-  object DBEdit3: TDBEdit
-    Left = 777
-    Top = 264
-    Width = 121
-    Height = 25
-    DataSource = DataSource1
-    TabOrder = 9
-  end
-  object DBCheckBox4: TDBCheckBox
-    Left = 392
-    Top = 329
-    Width = 97
+  object DBCheckBox2: TDBCheckBox
+    Left = 48
+    Top = 373
+    Width = 113
     Height = 17
-    Caption = #915#957#969#956#940#964#949#965#963#951
-    DataField = 'gnomateysi'
+    Caption = #913#960#959#965#963#943#945
+    DataField = 'absence'
     DataSource = DataSource1
-    TabOrder = 10
+    TabOrder = 8
     ValueChecked = '1'
     ValueUnchecked = '0'
+    OnClick = DBCheckBox1Click
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -253,93 +229,97 @@ object frmProgramDay: TfrmProgramDay
     Left = 464
     Top = 488
   end
-  object FDQueryParent: TFDQuery
+  object FDQueryTeacher: TFDQuery
     Active = True
     Connection = FDConnection1
     SQL.Strings = (
-      'SELECT id,lastname FROM parent')
+      
+        'SELECT id, CONCAT(lastname, '#39'  '#39', firstname) AS FullNameTeacher ' +
+        ' FROM teachers')
     Left = 120
     Top = 488
   end
-  object DataSourceParent: TDataSource
-    DataSet = FDQueryParent
-    Left = 552
+  object DataSourceTeacher: TDataSource
+    DataSet = FDQueryTeacher
+    Left = 672
     Top = 488
   end
   object FDQuery1: TFDQuery
     Active = True
+    AfterInsert = FDQuery1AfterInsert
+    BeforePost = FDQuery1BeforePost
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT'
-      '  T.*,'
-      '  S.lastname as ParentName'
+      '  P.id,'
+      '  P.date AS Imerominia,'
+      '  P.time AS ora,'
+      '  P.kids_id as kids_id,'
+      '  p.teachers_id as teachers_id,'
+      '  T.lastname AS Therapeutis_name,'
+      '  K.lastname AS Paidi_Eponymo_name,'
+      '  P.debit AS Xreosi,'
+      '  P.debit2 AS Xreosi2,'
+      '  P.absence AS absence'
       'FROM'
-      '  kids  T'
+      '  PROGRAM P'
       'LEFT JOIN'
-      '  parent S ON T.parent_id = S.id')
+      '  teachers T ON P.teachers_id = T.id'
+      'LEFT JOIN'
+      '  kids K ON P.kids_id = K.id;')
     Left = 240
     Top = 488
     object FDQuery1id: TFDAutoIncField
       FieldName = 'id'
-      Origin = 'id'
-      ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = False
     end
-    object FDQuery1parent_id: TIntegerField
-      FieldName = 'parent_id'
-      Origin = 'parent_id'
+    object FDQuery1Imerominia: TDateField
+      FieldName = 'Imerominia'
       Required = True
     end
-    object FDQuery1fistname: TWideStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'fistname'
-      Origin = 'fistname'
-      Size = 60
+    object FDQuery1ora: TTimeField
+      FieldName = 'ora'
+      Required = True
     end
-    object FDQuery1lastname: TWideStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'lastname'
-      Origin = 'lastname'
-      Size = 60
+    object FDQuery1kids_id: TIntegerField
+      FieldName = 'kids_id'
+      Required = True
     end
-    object FDQuery1amka: TWideStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'amka'
-      Origin = 'amka'
-      Size = 14
+    object FDQuery1teachers_id: TIntegerField
+      FieldName = 'teachers_id'
+      Required = True
     end
-    object FDQuery1gnomateysi: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'gnomateysi'
-      Origin = 'gnomateysi'
-    end
-    object FDQuery1birthdate: TDateField
-      AutoGenerateValue = arDefault
-      FieldName = 'birthdate'
-      Origin = 'birthdate'
-    end
-    object FDQuery1ergo: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'ergo'
-      Origin = 'ergo'
-    end
-    object FDQuery1cyxo: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'cyxo'
-      Origin = 'cyxo'
-    end
-    object FDQuery1logo: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'logo'
-      Origin = 'logo'
-    end
-    object FDQuery1ParentName: TWideStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ParentName'
-      Origin = 'lastname'
-      ProviderFlags = []
+    object FDQuery1Therapeutis_name: TWideStringField
+      FieldName = 'Therapeutis_name'
       ReadOnly = True
       Size = 26
     end
+    object FDQuery1Paidi_Eponymo_name: TWideStringField
+      FieldName = 'Paidi_Eponymo_name'
+      ReadOnly = True
+      Size = 60
+    end
+    object FDQuery1Xreosi: TIntegerField
+      FieldName = 'Xreosi'
+    end
+    object FDQuery1Xreosi2: TIntegerField
+      FieldName = 'Xreosi2'
+    end
+    object FDQuery1absence: TIntegerField
+      FieldName = 'absence'
+    end
+  end
+  object FDQueryKid: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      'SELECT id, CONCAT(lastname, '#39' '#39', fistname) AS FullName FROM kids')
+    Left = 104
+    Top = 552
+  end
+  object DataSourceKid: TDataSource
+    DataSet = FDQueryKid
+    Left = 560
+    Top = 488
   end
 end

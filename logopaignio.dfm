@@ -155,6 +155,7 @@ object Form1: TForm1
     Top = 72
     object N1: TMenuItem
       Caption = #928#961#972#947#961#945#956#956#945
+      OnClick = N1Click
     end
     object N4: TMenuItem
       Caption = #913#957#945#966#959#961#941#962

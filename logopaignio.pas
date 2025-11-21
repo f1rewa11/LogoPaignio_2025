@@ -20,6 +20,7 @@ type
     procedure N3Click(Sender: TObject);
     procedure N6Click(Sender: TObject);
     procedure N5Click(Sender: TObject);
+    procedure N1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,7 +34,12 @@ implementation
 
 {$R *.dfm}
 
-uses teachers, parent, kids;
+uses teachers, parent, kids, programday;
+
+procedure TForm1.N1Click(Sender: TObject);
+begin
+ frmProgramDay.show
+end;
 
 procedure TForm1.N3Click(Sender: TObject);
 begin
