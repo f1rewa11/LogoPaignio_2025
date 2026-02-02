@@ -134,6 +134,7 @@ object Form1: TForm1
     0008E0000008C00000188000003800000078000000F8000003F800000FF80001
     FFF80001FFF80001FFF88003FFF88007FFF8C00FFFF8F01FFFF8FFFFFFF8}
   Menu = MainMenu1
+  WindowState = wsMaximized
   TextHeight = 15
   object StatusBar1: TStatusBar
     Left = 0
@@ -154,8 +155,15 @@ object Form1: TForm1
     Left = 80
     Top = 72
     object N1: TMenuItem
-      Caption = #928#961#972#947#961#945#956#956#945
-      OnClick = N1Click
+      Caption = #924#949#957#959#973
+      object N7: TMenuItem
+        Caption = #928#961#972#947#961#945#956#956#945
+        OnClick = N7Click
+      end
+      object N8: TMenuItem
+        Caption = #917#953#963#960#961#940#958#949#953#962
+        OnClick = N8Click
+      end
     end
     object N4: TMenuItem
       Caption = #913#957#945#966#959#961#941#962

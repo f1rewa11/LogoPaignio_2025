@@ -6,7 +6,8 @@ uses
   teachers in 'teachers.pas' {FrmTeachers},
   programday in 'programday.pas' {frmProgramDay},
   parent in 'parent.pas' {FrmParent},
-  kids in 'kids.pas' {frmKids};
+  kids in 'kids.pas' {frmKids},
+  receipts in 'receipts.pas' {frmReceipts};
 
 {$R *.res}
 
@@ -18,5 +19,6 @@ begin
   Application.CreateForm(TfrmProgramDay, frmProgramDay);
   Application.CreateForm(TFrmParent, FrmParent);
   Application.CreateForm(TfrmKids, frmKids);
+  Application.CreateForm(TfrmReceipts, frmReceipts);
   Application.Run;
 end.

@@ -1,0 +1,13 @@
+﻿[Label1]
+Coordinates=93,10,53,58
+
+[FDConnection1]
+Coordinates=200,1,104,36
+
+[DataSource1]
+Coordinates=92,1,89,36
+
+[]
+Coordinates=10,10,73,124
+Visible=True
+

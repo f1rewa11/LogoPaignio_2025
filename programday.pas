@@ -10,7 +10,7 @@ uses
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Buttons, Vcl.DBCtrls, Vcl.Mask, Vcl.ComCtrls;
+  Vcl.Buttons, Vcl.DBCtrls, Vcl.Mask, Vcl.ComCtrls, Vcl.Imaging.jpeg, RLReport, System.DateUtils;
 
 type
   TfrmProgramDay = class(TForm)
@@ -45,6 +45,51 @@ type
     FDQuery1Xreosi: TIntegerField;
     FDQuery1Xreosi2: TIntegerField;
     FDQuery1absence: TIntegerField;
+    Label5: TLabel;
+    btnSearchClick1: TButton;
+    edtSearch: TEdit;
+    edtSearch2: TEdit;
+    edtSearch3: TEdit;
+    RLReport1: TRLReport;
+    RLBand2: TRLBand;
+    RLLabel2: TRLLabel;
+    RLDBText2: TRLDBText;
+    RLBand3: TRLBand;
+    RLDBText1: TRLDBText;
+    RLDraw1: TRLDraw;
+    RLBand4: TRLBand;
+    RLBand5: TRLBand;
+    RLLabel6: TRLLabel;
+    RLImage1: TRLImage;
+    RLLabel1: TRLLabel;
+    RLDBText3: TRLDBText;
+    dtsPrint: TDataSource;
+    Button1: TButton;
+    Button2: TButton;
+    RLLabel3: TRLLabel;
+    DBCheckBox3: TDBCheckBox;
+    FDQueryPrint: TFDQuery;
+    Button3: TButton;
+    FDQuery1replacement: TIntegerField;
+    FDQueryPrintCount: TFDQuery;
+    RLReport2: TRLReport;
+    RLBand1: TRLBand;
+    RLLabel4: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLBand6: TRLBand;
+    RLDBText5: TRLDBText;
+    RLDraw2: TRLDraw;
+    RLDBText6: TRLDBText;
+    RLBand7: TRLBand;
+    RLBand8: TRLBand;
+    RLLabel7: TRLLabel;
+    RLImage2: TRLImage;
+    RLLabel8: TRLLabel;
+    RLDBText4: TRLDBText;
+    dtsPrintCount: TDataSource;
+    RLDBText7: TRLDBText;
+    RLLabel9: TRLLabel;
+    CounterAA: TRLSystemInfo;
     procedure DateTimePicker2Change(Sender: TObject);
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
@@ -52,6 +97,14 @@ type
     procedure DBCheckBox1Click(Sender: TObject);
     procedure DBCheckBox4Click(Sender: TObject);
     procedure FDQuery1BeforePost(DataSet: TDataSet);
+    procedure btnSearchClick1Click(Sender: TObject);
+    procedure btnSearchClick2Click(Sender: TObject);
+    procedure DBLookupComboBox1DropDown(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure FDQuery1NewRecord(DataSet: TDataSet);
+
 
 
   private
@@ -72,6 +125,139 @@ uses logopaignio;
 
 
 
+
+procedure TfrmProgramDay.btnSearchClick1Click(Sender: TObject);
+var
+  SearchText: String;
+  SearchText2: String;
+  SearchText3: String;
+begin
+  // 1. Παίρνουμε το κείμενο και καθαρίζουμε τα κενά γύρω-γύρω
+  SearchText := Trim(edtSearch.Text);
+  SearchText2 := Trim(edtSearch2.Text);
+  SearchText3 := Trim(edtSearch3.Text);
+  // 2. Αν είναι κενό, καθαρίζουμε το φίλτρο (τα δείχνουμε όλα)
+  if SearchText = '' then
+  begin
+    FDQuery1.Filtered := False;
+  end
+  else
+  begin
+    // 3. Φτιάχνουμε το φίλτρο "Combo"
+    // ΠΡΟΣΟΧΗ: Χρησιμοποιώ το 'fistname' όπως το έχεις στη βάση σου (χωρίς r)
+
+    FDQuery1.Filter := '( Therapeutis_name LIKE ' + QuotedStr('%' + SearchText + '%') + ')' +
+                       ' AND ' +
+                       '(Paidi_Eponymo_name LIKE ' + QuotedStr('%' + SearchText2 + '%') + ')' +
+                       ' AND ' +
+                       '(Imerominia LIKE ' + QuotedStr('%' + SearchText3 + '%') + ')';
+
+      // 4. Ενεργοποιούμε το φίλτρο
+    FDQuery1.Filtered := True;
+  end;
+
+end;
+
+procedure TfrmProgramDay.btnSearchClick2Click(Sender: TObject);
+var
+  SearchText: String;
+begin
+  // 1. Παίρνουμε το κείμενο και καθαρίζουμε τα κενά γύρω-γύρω
+  SearchText := Trim(edtSearch2.Text);
+
+  // 2. Αν είναι κενό, καθαρίζουμε το φίλτρο (τα δείχνουμε όλα)
+  if SearchText = '' then
+  begin
+    FDQuery1.Filtered := False;
+  end
+  else
+  begin
+    // 3. Φτιάχνουμε το φίλτρο "Combo"
+    // ΠΡΟΣΟΧΗ: Χρησιμοποιώ το 'fistname' όπως το έχεις στη βάση σου (χωρίς r)
+
+    FDQuery1.Filter := '( Therapeutis_name LIKE ' + QuotedStr('%' + SearchText + '%') + ')' +
+                       ' OR ' +
+                       '(Paidi_Eponymo_name LIKE ' + QuotedStr('%' + SearchText + '%') + ')' +
+                       ' OR ' +
+                       '(Imerominia LIKE ' + QuotedStr('%' + SearchText + '%') + ')';
+
+      // 4. Ενεργοποιούμε το φίλτρο
+    FDQuery1.Filtered := True;
+  end;
+
+
+end;
+
+procedure TfrmProgramDay.Button1Click(Sender: TObject);
+var
+ SelectedTeacherID: Integer; // 1. Δηλώνουμε τη μεταβλητή εδώ
+ SelectedDateID: TDateTime;
+ FirstDay, LastDay: TDateTime;
+
+begin
+  SelectedTeacherID := FDQuery1.FieldByName('Teachers_id').AsInteger;
+  SelectedDateID := FDQuery1.FieldByName('Imerominia').AsDateTime;
+  FDQueryPrint.Close;
+  FDQueryPrint.ParamByName('SelectedTeacher').AsInteger := SelectedTeacherID;
+  FDQueryPrint.ParamByName('StartDate').AsDate := SelectedDateID;
+  FDQueryPrint.ParamByName('EndDate').AsDate   := SelectedDateID;
+  //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
+  FDQueryPrint.ParamByName('SelectedAbsence').AsInteger := 0;
+  FDQueryPrint.Open;
+  RLLabel3.Caption := 'Χρεωμένα μαθήματα ';
+  //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
+  frmProgramDay.RLReport1.preview;
+
+
+
+end;
+
+procedure TfrmProgramDay.Button2Click(Sender: TObject);
+var
+ SelectedTeacherID: Integer; // 1. Δηλώνουμε τη μεταβλητή εδώ
+ SelectedDateID: TDateTime;
+ FirstDay, LastDay: TDateTime;
+begin
+  SelectedTeacherID := FDQuery1.FieldByName('Teachers_id').AsInteger;
+  SelectedDateID := FDQuery1.FieldByName('Imerominia').AsDateTime;
+  FirstDay := StartOfTheMonth(SelectedDateID);
+  LastDay  := EndOfTheMonth(SelectedDateID);
+  FDQueryPrint.Close;
+  FDQueryPrint.ParamByName('SelectedTeacher').AsInteger := SelectedTeacherID;
+  FDQueryPrint.ParamByName('StartDate').AsDate := FirstDay;
+  FDQueryPrint.ParamByName('EndDate').AsDate   := LastDay;
+  //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
+  FDQueryPrint.ParamByName('SelectedAbsence').AsInteger := 1;
+  FDQueryPrint.Open;
+   RLLabel3.Caption := 'Απουσίες για αναπλήρωση ';
+  //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
+  frmProgramDay.RLReport1.preview;
+
+
+
+end;
+
+procedure TfrmProgramDay.Button3Click(Sender: TObject);
+var
+ SelectedTeacherID: Integer; // 1. Δηλώνουμε τη μεταβλητή εδώ
+ SelectedDateID: TDateTime;
+ FirstDay, LastDay: TDateTime;
+begin
+  SelectedTeacherID := FDQuery1.FieldByName('Teachers_id').AsInteger;
+  SelectedDateID := FDQuery1.FieldByName('Imerominia').AsDateTime;
+  FirstDay := StartOfTheMonth(SelectedDateID);
+  LastDay  := EndOfTheMonth(SelectedDateID);
+  FDQueryPrintCount.Close;
+  //FDQueryPrintCount.ParamByName('StartDate').AsDate := FirstDay;
+  //FDQueryPrintCount.ParamByName('EndDate').AsDate   := LastDay;
+  //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
+  //FDQueryPrint.ParamByName('SelectedAbsence').AsInteger :=0;
+  FDQueryPrintCount.Open;
+   RLLabel3.Caption := 'Απουσίες για αναπλήρωση ';
+  //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
+  frmProgramDay.RLReport2.preview;
+
+end;
 
 procedure TfrmProgramDay.DataSource1DataChange(Sender: TObject; Field: TField);
 begin
@@ -130,6 +316,13 @@ begin
     DBCheckBox1.Checked := False;
 end;
 
+procedure TfrmProgramDay.DBLookupComboBox1DropDown(Sender: TObject);
+begin
+// Κλείνουμε και ξανανοίγουμε το Query για να πάρει τα φρέσκα δεδομένα
+  FDQueryKid.Close;
+  FDQueryKid.Open;
+end;
+
 procedure TfrmProgramDay.FDQuery1AfterInsert(DataSet: TDataSet);
 begin
  // Μόλις πατηθεί το +, πάρε τις τιμές από τα ημερολόγια και βάλ' τες στη βάση
@@ -154,5 +347,27 @@ begin
 
   // Σημείωση: Τα DBCheckBox αποθηκεύονται αυτόματα, δεν χρειάζονται κώδικα εδώ.
 end;
+
+procedure TfrmProgramDay.FDQuery1NewRecord(DataSet: TDataSet);
+begin
+// Ορίζουμε αρχικές τιμές 0 για να είναι ξε-τικάρισμα τα Checkbox
+
+  // Αναπλήρωση
+  FDQuery1.FieldByName('replacement').AsInteger := 0;
+
+  // Απουσία
+  FDQuery1.FieldByName('absence').AsInteger := 0;
+
+  // Ακυρώθηκε με χρέωση (Xreosi)
+  FDQuery1.FieldByName('Xreosi').AsInteger := 0;
+
+  // Ακυρώθηκε με μισή χρέωση (Xreosi2)
+  FDQuery1.FieldByName('Xreosi2').AsInteger := 0;
+
+  // Μπορείς να ορίσεις και προεπιλεγμένη ημερομηνία αν θες (π.χ. σημερινή)
+  FDQuery1.FieldByName('Imerominia').AsDateTime := Date;
+end;
+
+
 
 end.

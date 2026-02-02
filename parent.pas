@@ -36,6 +36,10 @@ type
     DBEdit5: TDBEdit;
     Label8: TLabel;
     DBEdit6: TDBEdit;
+    Label9: TLabel;
+    btnSearchClick: TButton;
+    edtSearch: TEdit;
+    procedure btnSearchClickClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -52,5 +56,32 @@ implementation
 
 uses logopaignio;
 
+
+procedure TFrmParent.btnSearchClickClick(Sender: TObject);
+var
+  SearchText: String;
+begin
+  // 1. Παίρνουμε το κείμενο και καθαρίζουμε τα κενά γύρω-γύρω
+  SearchText := Trim(edtSearch.Text);
+
+  // 2. Αν είναι κενό, καθαρίζουμε το φίλτρο (τα δείχνουμε όλα)
+  if SearchText = '' then
+  begin
+    FDQuery1.Filtered := False;
+  end
+  else
+  begin
+    // 3. Φτιάχνουμε το φίλτρο "Combo"
+    // ΠΡΟΣΟΧΗ: Χρησιμοποιώ το 'fistname' όπως το έχεις στη βάση σου (χωρίς r)
+
+    FDQuery1.Filter := '(lastname LIKE ' + QuotedStr('%' + SearchText + '%') + ')' +
+                       ' OR ' +
+                       '(firstname LIKE ' + QuotedStr('%' + SearchText + '%') + ')';
+
+    // 4. Ενεργοποιούμε το φίλτρο
+    FDQuery1.Filtered := True;
+  end;
+
+end;
 
 end.

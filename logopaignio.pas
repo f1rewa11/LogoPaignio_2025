@@ -17,10 +17,13 @@ type
     N4: TMenuItem;
     StatusBar1: TStatusBar;
     ToolBar1: TToolBar;
+    N7: TMenuItem;
+    N8: TMenuItem;
     procedure N3Click(Sender: TObject);
     procedure N6Click(Sender: TObject);
     procedure N5Click(Sender: TObject);
-    procedure N1Click(Sender: TObject);
+    procedure N7Click(Sender: TObject);
+    procedure N8Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,12 +37,7 @@ implementation
 
 {$R *.dfm}
 
-uses teachers, parent, kids, programday;
-
-procedure TForm1.N1Click(Sender: TObject);
-begin
- frmProgramDay.show
-end;
+uses teachers, parent, kids, programday, receipts;
 
 procedure TForm1.N3Click(Sender: TObject);
 begin
@@ -54,6 +52,21 @@ end;
 procedure TForm1.N6Click(Sender: TObject);
 begin
  frmParent.Show;
+end;
+
+procedure TForm1.N7Click(Sender: TObject);
+begin
+  frmProgramDay.show
+end;
+
+procedure TForm1.N8Click(Sender: TObject);
+begin
+    // Έλεγχος: Αν η φόρμα δεν υπάρχει (είναι nil), τότε τη δημιουργούμε.
+  if frmReceipts = nil then
+    frmReceipts := TfrmReceipts.Create(Application);
+
+  // Την εμφανίζουμε
+      frmReceipts.show
 end;
 
 end.
