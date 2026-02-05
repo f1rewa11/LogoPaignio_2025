@@ -3736,7 +3736,7 @@ object frmReceipts: TfrmReceipts
       object RLLabel8: TRLLabel
         Left = 199
         Top = 63
-        Width = 330
+        Width = 418
         Height = 24
         Caption = '---------'
         Font.Charset = DEFAULT_CHARSET
