@@ -136,25 +136,14 @@ begin
   SearchText := Trim(edtSearch.Text);
   SearchText2 := Trim(edtSearch2.Text);
   SearchText3 := Trim(edtSearch3.Text);
-  // 2. Αν είναι κενό, καθαρίζουμε το φίλτρο (τα δείχνουμε όλα)
-  if SearchText = '' then
-  begin
-    FDQuery1.Filtered := False;
-  end
-  else
-  begin
-    // 3. Φτιάχνουμε το φίλτρο "Combo"
-    // ΠΡΟΣΟΧΗ: Χρησιμοποιώ το 'fistname' όπως το έχεις στη βάση σου (χωρίς r)
-
-    FDQuery1.Filter := '( Therapeutis_name LIKE ' + QuotedStr('%' + SearchText + '%') + ')' +
+  FDQuery1.Filter := '( Therapeutis_name LIKE ' + QuotedStr('%' + SearchText + '%') + ')' +
                        ' AND ' +
                        '(Paidi_Eponymo_name LIKE ' + QuotedStr('%' + SearchText2 + '%') + ')' +
                        ' AND ' +
-                       '(Imerominia LIKE ' + QuotedStr('%' + SearchText3 + '%') + ')';
+                       '(Imerominia LIKE ' + QuotedStr(SearchText3) + ')';
 
       // 4. Ενεργοποιούμε το φίλτρο
     FDQuery1.Filtered := True;
-  end;
 
 end;
 

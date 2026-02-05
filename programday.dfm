@@ -267,8 +267,8 @@ object frmProgramDay: TfrmProgramDay
     TextHint = #919#956#949#961#959#956#951#957#943#945
   end
   object RLReport1: TRLReport
-    Left = 151
-    Top = 175
+    Left = 244
+    Top = 168
     Width = 794
     Height = 1123
     DataSource = dtsPrint
@@ -383,7 +383,7 @@ object frmProgramDay: TfrmProgramDay
       Height = 103
       BandType = btTitle
       object RLLabel6: TRLLabel
-        Left = 103
+        Left = 127
         Top = 22
         Width = 588
         Height = 24
@@ -2045,8 +2045,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button3Click
   end
   object RLReport2: TRLReport
-    Left = 356
-    Top = 490
+    Left = 244
+    Top = 395
     Width = 794
     Height = 1123
     DataSource = dtsPrintCount

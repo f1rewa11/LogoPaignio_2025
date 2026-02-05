@@ -10,7 +10,7 @@ uses
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Buttons, Vcl.DBCtrls, Vcl.Mask, Vcl.ComCtrls, RLReport, Vcl.Imaging.jpeg;
+  Vcl.Buttons, Vcl.DBCtrls, Vcl.Mask, Vcl.ComCtrls, RLReport, Vcl.Imaging.jpeg, System.DateUtils;
 
 type
   TfrmReceipts = class(TForm)
@@ -32,7 +32,7 @@ type
     Label2: TLabel;
     Label5: TLabel;
     DBMemo1: TDBMemo;
-    RLReport1: TRLReport;
+    RLPayments: TRLReport;
     RLBand2: TRLBand;
     RLLabel2: TRLLabel;
     RLLabel4: TRLLabel;
@@ -53,6 +53,28 @@ type
     btnSearchClick: TButton;
     edtSearch: TEdit;
     FDQueryPrint: TFDQuery;
+    edtSearch3: TEdit;
+    RLReport2: TRLReport;
+    RLBand1: TRLBand;
+    RLLabel1: TRLLabel;
+    RLLabel3: TRLLabel;
+    RLLabel9: TRLLabel;
+    RLBand6: TRLBand;
+    RLDBText5: TRLDBText;
+    RLDraw2: TRLDraw;
+    RLDBText6: TRLDBText;
+    RLDBText4: TRLDBText;
+    RLDBText7: TRLDBText;
+    RLBand7: TRLBand;
+    RLBand8: TRLBand;
+    RLLabel7: TRLLabel;
+    RLImage2: TRLImage;
+    RLLabel8: TRLLabel;
+    Button3: TButton;
+    FDQueryPrintSum: TFDQuery;
+    dtsPrintSum: TDataSource;
+    RLDBText8: TRLDBText;
+    RLDBResult2: TRLDBResult;
 
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
@@ -62,6 +84,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGrid1CellClick(Column: TColumn);
     procedure btnSearchClickClick(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
 
 
   private
@@ -84,27 +107,29 @@ uses logopaignio;
 procedure TfrmReceipts.btnSearchClickClick(Sender: TObject);
 var
   SearchText: String;
+  SearchText3: String;
 begin
   // 1. Παίρνουμε το κείμενο και καθαρίζουμε τα κενά γύρω-γύρω
   SearchText := Trim(edtSearch.Text);
+  SearchText3 := Trim(edtSearch3.Text);
 
   // 2. Αν είναι κενό, καθαρίζουμε το φίλτρο (τα δείχνουμε όλα)
-  if SearchText = '' then
-  begin
-    FDQuery1.Filtered := False;
-  end
-  else
-  begin
+ // if SearchText = ''  then
+  //begin
+    //FDQuery1.Filtered := False;
+  //end
+  //else
+  //begin
     // 3. Φτιάχνουμε το φίλτρο "Combo"
     // ΠΡΟΣΟΧΗ: Χρησιμοποιώ το 'fistname' όπως το έχεις στη βάση σου (χωρίς r)
 
     FDQuery1.Filter := '(Paidi_Eponymo LIKE ' + QuotedStr('%' + SearchText + '%') + ')' +
-                       ' OR ' +
-                       '(Paidi_Onoma LIKE ' + QuotedStr('%' + SearchText + '%') + ')';
+                       ' AND ' +
+                       '(Payment_date LIKE ' + QuotedStr('%' + SearchText3 + '%') + ')';
 
     // 4. Ενεργοποιούμε το φίλτρο
     FDQuery1.Filtered := True;
-  end;
+  //end;
 
 end;
 
@@ -116,10 +141,34 @@ begin
   FDQueryPrint.Close;
   FDQueryPrint.ParamByName('SelectedKid').AsInteger := SelectedKidID;
   FDQueryPrint.Open;
-  // ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' αποδείξεις.');
-  frmReceipts.RLReport1.Preview;
+  //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' αποδείξεις.');
+  frmReceipts.RLPayments.Preview;
 
  end;
+
+procedure TfrmReceipts.Button3Click(Sender: TObject);
+var
+ SelectedTeacherID: Integer; // 1. Δηλώνουμε τη μεταβλητή εδώ
+ SelectedDateID: TDateTime;
+ FirstDay, LastDay: TDateTime;
+begin
+  SelectedTeacherID := FDQuery1.FieldByName('Kid_id').AsInteger;
+  SelectedDateID := FDQuery1.FieldByName('Payment_Date').AsDateTime;
+  FirstDay := StartOfTheMonth(SelectedDateID);
+  LastDay  := EndOfTheMonth(SelectedDateID);
+  FDQueryPrintSum.Close;
+  FDQueryPrintSum.ParamByName('StartDate').DataType := ftDate;
+  FDQueryPrintSum.ParamByName('EndDate').DataType   := ftDate;
+  FDQueryPrintSum.ParamByName('StartDate').AsDate := FirstDay;
+  FDQueryPrintSum.ParamByName('EndDate').AsDate   := LastDay;
+  //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
+  //FDQueryPrint.ParamByName('SelectedAbsence').AsInteger :=0;
+  FDQueryPrintSum.Open;
+  //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrintSum.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
+  frmReceipts.RLReport2.preview;
+
+
+end;
 
 procedure TfrmReceipts.DataSource1DataChange(Sender: TObject; Field: TField);
 begin
