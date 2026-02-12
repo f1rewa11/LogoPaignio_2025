@@ -90,6 +90,27 @@ type
     RLDBText7: TRLDBText;
     RLLabel9: TRLLabel;
     CounterAA: TRLSystemInfo;
+    Button4: TButton;
+    FDQueryProgramKid: TFDQuery;
+    dtsProgramKid: TDataSource;
+    RLReport3: TRLReport;
+    RLBand9: TRLBand;
+    RLLabel10: TRLLabel;
+    RLDBText8: TRLDBText;
+    RLLabel11: TRLLabel;
+    RLBand10: TRLBand;
+    RLDBText9: TRLDBText;
+    RLDraw3: TRLDraw;
+    RLDBText10: TRLDBText;
+    RLSystemInfo1: TRLSystemInfo;
+    RLBand11: TRLBand;
+    RLBand12: TRLBand;
+    RLLabel12: TRLLabel;
+    RLImage3: TRLImage;
+    RLLabel13: TRLLabel;
+    RLDBText11: TRLDBText;
+    Button5: TButton;
+    FDQueryPrintAbsence: TFDQuery;
     procedure DateTimePicker2Change(Sender: TObject);
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
@@ -104,6 +125,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FDQuery1NewRecord(DataSet: TDataSet);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
 
 
 
@@ -136,6 +159,9 @@ begin
   SearchText := Trim(edtSearch.Text);
   SearchText2 := Trim(edtSearch2.Text);
   SearchText3 := Trim(edtSearch3.Text);
+  if SearchText3 = '' then
+    SearchText3 := '%';
+
   FDQuery1.Filter := '( Therapeutis_name LIKE ' + QuotedStr('%' + SearchText + '%') + ')' +
                        ' AND ' +
                        '(Paidi_Eponymo_name LIKE ' + QuotedStr('%' + SearchText2 + '%') + ')' +
@@ -192,6 +218,8 @@ begin
   FDQueryPrint.ParamByName('EndDate').AsDate   := SelectedDateID;
   //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
   FDQueryPrint.ParamByName('SelectedAbsence').AsInteger := 0;
+  FDQueryPrint.ParamByName('SelectedReplacement').AsInteger := 1;
+  dtsPrint.DataSet := FDQueryPrint;
   FDQueryPrint.Open;
   RLLabel3.Caption := 'Χρεωμένα μαθήματα ';
   //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
@@ -211,14 +239,16 @@ begin
   SelectedDateID := FDQuery1.FieldByName('Imerominia').AsDateTime;
   FirstDay := StartOfTheMonth(SelectedDateID);
   LastDay  := EndOfTheMonth(SelectedDateID);
-  FDQueryPrint.Close;
-  FDQueryPrint.ParamByName('SelectedTeacher').AsInteger := SelectedTeacherID;
-  FDQueryPrint.ParamByName('StartDate').AsDate := FirstDay;
-  FDQueryPrint.ParamByName('EndDate').AsDate   := LastDay;
+  FDQueryPrintAbsence.Close;
+  FDQueryPrintAbsence.ParamByName('SelectedTeacher').AsInteger := SelectedTeacherID;
+  FDQueryPrintAbsence.ParamByName('StartDate').AsDate := FirstDay;
+  FDQueryPrintAbsence.ParamByName('EndDate').AsDate   := LastDay;
   //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
-  FDQueryPrint.ParamByName('SelectedAbsence').AsInteger := 1;
-  FDQueryPrint.Open;
-   RLLabel3.Caption := 'Απουσίες για αναπλήρωση ';
+  FDQueryPrintAbsence.ParamByName('SelectedAbsence').AsInteger := 1;
+  //FDQueryPrintAbsence.ParamByName('SelectedReplacement').AsInteger := 0;
+    dtsPrint.DataSet := FDQueryPrintAbsence;
+  FDQueryPrintAbsence.Open;
+  RLLabel3.Caption := 'Απουσίες για αναπλήρωση ';
   //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
   frmProgramDay.RLReport1.preview;
 
@@ -246,6 +276,48 @@ begin
   //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
   frmProgramDay.RLReport2.preview;
 
+end;
+
+procedure TfrmProgramDay.Button4Click(Sender: TObject);
+var
+ SelectedTeacherID: Integer; // 1. Δηλώνουμε τη μεταβλητή εδώ
+ SelectedDateID: TDateTime;
+ FirstDay, LastDay: TDateTime;
+begin
+  SelectedTeacherID := FDQuery1.FieldByName('Teachers_id').AsInteger;
+  SelectedDateID := FDQuery1.FieldByName('Imerominia').AsDateTime;
+  FirstDay := StartOfTheMonth(SelectedDateID);
+  LastDay  := EndOfTheMonth(SelectedDateID);
+  FDQueryPrint.Close;
+  FDQueryPrint.ParamByName('SelectedTeacher').AsInteger := SelectedTeacherID;
+  FDQueryPrint.ParamByName('StartDate').AsDate := FirstDay;
+  FDQueryPrint.ParamByName('EndDate').AsDate   := LastDay;
+  //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
+  FDQueryPrint.ParamByName('SelectedReplacement').AsInteger := 1;
+  FDQueryPrint.ParamByName('SelectedAbsence').AsInteger :=0;
+  FDQueryPrint.Open;
+   RLLabel3.Caption := 'αναπλήρωση ';
+  //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
+  frmProgramDay.RLReport1.preview;
+
+end;
+
+procedure TfrmProgramDay.Button5Click(Sender: TObject);
+var
+ SelectedKidsID: Integer;
+begin
+  SelectedKidsID := FDQuery1.FieldByName('Kids_id').AsInteger;
+  //SelectedDateID := FDQuery1.FieldByName('Imerominia').AsDateTime;
+  FDQueryProgramKid.Close;
+  FDQueryProgramKid.ParamByName('SelectedKids').AsInteger := SelectedKidsID;
+  //FDQueryProgramKid.ParamByName('StartDate').AsDate := SelectedDateID;
+  //FDQueryProgramKid.ParamByName('EndDate').AsDate   := SelectedDateID;
+  //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
+  //FDQueryProgramKid.ParamByName('SelectedAbsence').AsInteger := 0;
+  FDQueryProgramKid.Open;
+  RLLabel3.Caption := 'Χρεωμένα μαθήματα ';
+  //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
+  frmProgramDay.RLReport3.preview;
 end;
 
 procedure TfrmProgramDay.DataSource1DataChange(Sender: TObject; Field: TField);
