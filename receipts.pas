@@ -75,6 +75,22 @@ type
     dtsPrintSum: TDataSource;
     RLDBText8: TRLDBText;
     RLDBResult2: TRLDBResult;
+    Button2: TButton;
+    dtsNextAPY: TDataSource;
+    FDQueryNextAPY: TFDQuery;
+    RLReport3: TRLReport;
+    RLBand13: TRLBand;
+    RLLabel15: TRLLabel;
+    RLBand14: TRLBand;
+    RLDraw4: TRLDraw;
+    RLDBText15: TRLDBText;
+    RLDBText16: TRLDBText;
+    RLDBText18: TRLDBText;
+    RLBand15: TRLBand;
+    RLBand16: TRLBand;
+    RLLabel17: TRLLabel;
+    RLImage4: TRLImage;
+    RLLabel18: TRLLabel;
 
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
@@ -85,6 +101,8 @@ type
     procedure DBGrid1CellClick(Column: TColumn);
     procedure btnSearchClickClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure dtsNextAPYDataChange(Sender: TObject; Field: TField);
 
 
   private
@@ -146,6 +164,45 @@ begin
 
  end;
 
+procedure TfrmReceipts.Button2Click(Sender: TObject);
+var
+ SelectedDateID: TDateTime;
+ FirstDay, LastDay: TDateTime;
+begin
+  if Trim(edtSearch3.Text) <> '' then
+    begin
+      // Προσπαθούμε να μετατρέψουμε το κείμενο σε κανονική Ημερομηνία
+      if TryStrToDate(Trim(edtSearch3.Text), FirstDay) then
+        begin
+          FDQueryNextAPY.Close;
+          FDQueryNextAPY.ParamByName('FirstDay').DataType := ftDate;
+          FDQueryNextAPY.ParamByName('FirstDay').AsDate := FirstDay;
+          FDQueryNextAPY.ParamByName('LastDay').DataType := ftDate;
+          FDQueryNextAPY.ParamByName('LastDay').AsDate := FirstDay;
+          FDQueryNextAPY.Open;
+        end
+        else
+        begin
+          ShowMessage('Παρακαλώ εισάγετε μια έγκυρη μορφή ημερομηνίας (π.χ. 15/05/2026).');
+        end;
+    end
+    else
+      begin
+          FDQueryNextAPY.Close;
+          FirstDay := StartOfTheMonth(Date);
+          LastDay  := EndOfTheMonth(Date);
+          FDQueryNextAPY.ParamByName('FirstDay').DataType := ftDate;
+          FDQueryNextAPY.ParamByName('FirstDay').AsDate := FirstDay;
+          FDQueryNextAPY.ParamByName('LastDay').DataType := ftDate;
+          FDQueryNextAPY.ParamByName('LastDay').AsDate := LastDay;
+          FDQueryNextAPY.Open;
+
+    end;
+  frmReceipts.RLReport3.preview;
+
+
+end;
+
 procedure TfrmReceipts.Button3Click(Sender: TObject);
 var
  SelectedTeacherID: Integer; // 1. Δηλώνουμε τη μεταβλητή εδώ
@@ -196,6 +253,17 @@ end;
 procedure TfrmReceipts.DBGrid1CellClick(Column: TColumn);
 begin
   // label6.Caption := FDQuery1.FieldByName('kid_id').AsInteger;
+end;
+
+procedure TfrmReceipts.dtsNextAPYDataChange(Sender: TObject; Field: TField);
+begin
+ //if FDQuery1.State = dsBrowse then
+  //begin
+
+   // if not FDQuery1.FieldByName('payment_date').IsNull then
+     //  DateTimePicker1.Date := FDQuery1.FieldByName('payment_date').AsDateTime;
+
+ // end;
 end;
 
 procedure TfrmReceipts.FDQuery1AfterInsert(DataSet: TDataSet);

@@ -108,9 +108,23 @@ type
     RLLabel12: TRLLabel;
     RLImage3: TRLImage;
     RLLabel13: TRLLabel;
-    RLDBText11: TRLDBText;
     Button5: TButton;
     FDQueryPrintAbsence: TFDQuery;
+    Label6: TLabel;
+    DBLookupComboBox3: TDBLookupComboBox;
+    FDQueryDebit_Cat: TFDQuery;
+    DataSourceDebit_Cat: TDataSource;
+    FDQuery1cat_debit_id: TIntegerField;
+    FDQuery1Debit_lesson: TIntegerField;
+    RLLabel14: TRLLabel;
+    RLDBText12: TRLDBText;
+    FDQueryProgramKid_backup: TFDQuery;
+    RLLabel15: TRLLabel;
+    RLLabel16: TRLLabel;
+    RLLabel17: TRLLabel;
+    RLDBText11: TRLDBText;
+    RLDBText13: TRLDBText;
+    RLDBText14: TRLDBText;
     procedure DateTimePicker2Change(Sender: TObject);
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
@@ -127,6 +141,7 @@ type
     procedure FDQuery1NewRecord(DataSet: TDataSet);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure DBLookupComboBox1CloseUp(Sender: TObject);
 
 
 
@@ -375,6 +390,47 @@ begin
   // Η Λογική: Αν τσέκαρα το 4, σβήσε το 1
   if DBCheckBox4.Checked then
     DBCheckBox1.Checked := False;
+end;
+
+procedure TfrmProgramDay.DBLookupComboBox1CloseUp(Sender: TObject);
+var
+  PrevCharge: Integer;
+begin
+  // Έλεγχος: Προχωράμε ΜΟΝΟ αν έχει επιλεγεί Καθηγητής και Παιδί (να μην είναι κενά)
+  // Προσοχή: Άλλαξε τα ονόματα των DBLookupComboBox στα δικά σου
+  if (not VarIsNull(DBLookupCombobox2.KeyValue)) and
+     (not VarIsNull(DBLookupCombobox1.KeyValue)) then
+  begin
+    // Στήνουμε το βοηθητικό SQL
+    FDQueryDebit_Cat.Close;
+    FDQueryDebit_Cat.SQL.Text :=
+      'SELECT cat_debit_id FROM program ' +
+      'WHERE teachers_id = :TID AND kids_id = :KID ' +
+      'ORDER BY date DESC, time DESC LIMIT 1'; // Παίρνουμε την αυστηρά τελευταία φορά
+
+    // Περνάμε ως παραμέτρους αυτά που διάλεξες στα 2 ComboBox
+    FDQueryDebit_Cat.ParamByName('TID').AsInteger := DBLookupCombobox2.KeyValue;
+    FDQueryDebit_Cat.ParamByName('KID').AsInteger := DBLookupCombobox1.KeyValue;
+
+    // Ανοίγουμε να δούμε αν βρήκε κάτι
+    FDQueryDebit_Cat.Open;
+
+    if not FDQueryDebit_Cat.IsEmpty then
+    begin
+      // Αν βρήκε, αποθηκεύουμε την τιμή
+      PrevCharge := FDQueryDebit_Cat.FieldByName('cat_debit_id').AsInteger;
+
+      // Βάζουμε το κεντρικό Query της φόρμας σου σε κατάσταση Επεξεργασίας (ή Προσθήκης)
+      // Προσοχή: Βάλε το όνομα του δικού σου κεντρικού FDQuery
+      if not (FDQuery1.State in [dsEdit, dsInsert]) then
+        FDQuery1.Edit;
+
+      // Ενημερώνουμε αυτόματα το πεδίο της χρέωσης!
+      FDQuery1.FieldByName('cat_debit_id').AsInteger := PrevCharge;
+    end;
+
+    FDQueryDebit_Cat.Close;
+  end;
 end;
 
 procedure TfrmProgramDay.DBLookupComboBox1DropDown(Sender: TObject);

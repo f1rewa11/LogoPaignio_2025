@@ -2,7 +2,7 @@ object frmProgramDay: TfrmProgramDay
   Left = 0
   Top = 0
   Caption = #928#961#972#947#961#945#956#956#945
-  ClientHeight = 634
+  ClientHeight = 677
   ClientWidth = 1357
   Color = clActiveCaption
   Font.Charset = DEFAULT_CHARSET
@@ -10,6 +10,7 @@ object frmProgramDay: TfrmProgramDay
   Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poDesigned
   WindowState = wsMaximized
   TextHeight = 17
   object Label1: TLabel
@@ -29,7 +30,7 @@ object frmProgramDay: TfrmProgramDay
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 42
+    Left = 40
     Top = 395
     Width = 72
     Height = 17
@@ -62,6 +63,13 @@ object frmProgramDay: TfrmProgramDay
     Width = 70
     Height = 17
     Caption = #936#940#967#957#969' '#947#953#945' '
+  end
+  object Label6: TLabel
+    Left = 386
+    Top = 395
+    Width = 47
+    Height = 17
+    Caption = #935#961#941#969#963#951
   end
   object DBNavigator1: TDBNavigator
     Left = 40
@@ -267,8 +275,8 @@ object frmProgramDay: TfrmProgramDay
     TextHint = #919#956#949#961#959#956#951#957#943#945
   end
   object RLReport1: TRLReport
-    Left = 375
-    Top = 440
+    Left = 326
+    Top = 536
     Width = 794
     Height = 1123
     DataSource = dtsPrint
@@ -2006,7 +2014,7 @@ object frmProgramDay: TfrmProgramDay
     end
   end
   object Button1: TButton
-    Left = 728
+    Left = 633
     Top = 26
     Width = 321
     Height = 25
@@ -2015,7 +2023,7 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 728
+    Left = 633
     Top = 57
     Width = 321
     Height = 25
@@ -2036,7 +2044,7 @@ object frmProgramDay: TfrmProgramDay
     ValueUnchecked = '0'
   end
   object Button3: TButton
-    Left = 728
+    Left = 633
     Top = 119
     Width = 321
     Height = 25
@@ -2045,8 +2053,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button3Click
   end
   object RLReport2: TRLReport
-    Left = -44
-    Top = 440
+    Left = 160
+    Top = 574
     Width = 794
     Height = 1123
     DataSource = dtsPrintCount
@@ -3797,7 +3805,7 @@ object frmProgramDay: TfrmProgramDay
     end
   end
   object Button4: TButton
-    Left = 728
+    Left = 633
     Top = 88
     Width = 321
     Height = 25
@@ -3806,8 +3814,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button4Click
   end
   object RLReport3: TRLReport
-    Left = 79
-    Top = 440
+    Left = 148
+    Top = 513
     Width = 794
     Height = 1123
     DataSource = dtsProgramKid
@@ -3824,8 +3832,8 @@ object frmProgramDay: TfrmProgramDay
       Height = 64
       BandType = btColumnHeader
       object RLLabel10: TRLLabel
-        Left = 291
-        Top = 24
+        Left = 51
+        Top = 40
         Width = 85
         Height = 18
         Caption = #919#956#949#961#959#956#951#957#943#945
@@ -3837,11 +3845,11 @@ object frmProgramDay: TfrmProgramDay
         ParentFont = False
       end
       object RLDBText8: TRLDBText
-        Left = 19
-        Top = 25
-        Width = 107
+        Left = 13
+        Top = 7
+        Width = 76
         Height = 19
-        DataField = 'kid_firstname'
+        DataField = 'FullName'
         DataSource = dtsProgramKid
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3852,11 +3860,11 @@ object frmProgramDay: TfrmProgramDay
         Text = ''
       end
       object RLLabel11: TRLLabel
-        Left = 527
-        Top = 24
-        Width = 88
+        Left = 157
+        Top = 40
+        Width = 51
         Height = 18
-        Caption = #920#949#961#945#960#949#965#964#942#962
+        Caption = #922#943#957#951#963#951
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -3864,20 +3872,57 @@ object frmProgramDay: TfrmProgramDay
         Font.Style = []
         ParentFont = False
       end
-      object RLDBText11: TRLDBText
-        Left = 150
-        Top = 25
-        Width = 105
-        Height = 19
-        DataField = 'kid_lastname'
-        DataSource = dtsProgramKid
+      object RLLabel14: TRLLabel
+        Left = 290
+        Top = 40
+        Width = 78
+        Height = 18
+        Caption = #928#949#961#953#947#961#945#966#942
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -16
         Font.Name = 'Arial'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
-        Text = ''
+      end
+      object RLLabel15: TRLLabel
+        Left = 497
+        Top = 40
+        Width = 62
+        Height = 18
+        Caption = #935#961#941#969#963#951
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object RLLabel16: TRLLabel
+        Left = 565
+        Top = 40
+        Width = 64
+        Height = 18
+        Caption = #928#943#963#964#969#963#951
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object RLLabel17: TRLLabel
+        Left = 642
+        Top = 40
+        Width = 73
+        Height = 18
+        Caption = #933#960#972#955#959#953#960#959
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
       end
     end
     object RLBand10: TRLBand
@@ -3887,12 +3932,12 @@ object frmProgramDay: TfrmProgramDay
       Height = 33
       AutoSize = True
       object RLDBText9: TRLDBText
-        Left = 281
+        Left = 60
         Top = 6
-        Width = 83
+        Width = 67
         Height = 16
         Alignment = taRightJustify
-        DataField = 'program_date'
+        DataField = 'Imerominia'
         DataSource = dtsProgramKid
         DisplayMask = 'dd/mm/yyyy'
         Text = ''
@@ -3905,20 +3950,56 @@ object frmProgramDay: TfrmProgramDay
         DrawKind = dkLine
       end
       object RLDBText10: TRLDBText
-        Left = 527
+        Left = 157
         Top = 6
-        Width = 107
+        Width = 100
         Height = 16
-        DataField = 'teacher_lastname'
+        DataField = 'Eidos_Kinisis'
         DataSource = dtsProgramKid
         Text = ''
       end
       object RLSystemInfo1: TRLSystemInfo
-        Left = 115
+        Left = 3
         Top = 6
         Width = 51
         Height = 16
         Info = itRecNo
+        Text = ''
+      end
+      object RLDBText12: TRLDBText
+        Left = 292
+        Top = 6
+        Width = 189
+        Height = 16
+        DataField = 'Perigrafi'
+        DataSource = dtsProgramKid
+        Text = ''
+      end
+      object RLDBText11: TRLDBText
+        Left = 520
+        Top = 6
+        Width = 39
+        Height = 16
+        DataField = 'Xreosi'
+        DataSource = dtsProgramKid
+        Text = ''
+      end
+      object RLDBText13: TRLDBText
+        Left = 581
+        Top = 6
+        Width = 44
+        Height = 16
+        DataField = 'Pistosi'
+        DataSource = dtsProgramKid
+        Text = ''
+      end
+      object RLDBText14: TRLDBText
+        Left = 645
+        Top = 6
+        Width = 100
+        Height = 16
+        DataField = 'Trexon_Ypoloipo'
+        DataSource = dtsProgramKid
         Text = ''
       end
     end
@@ -3926,7 +4007,7 @@ object frmProgramDay: TfrmProgramDay
       Left = 38
       Top = 238
       Width = 718
-      Height = 21
+      Height = 19
       AutoSize = True
       BandType = btSummary
     end
@@ -5560,13 +5641,25 @@ object frmProgramDay: TfrmProgramDay
     end
   end
   object Button5: TButton
-    Left = 728
-    Top = 150
+    Left = 983
+    Top = 26
     Width = 321
     Height = 25
     Caption = #922#945#961#964#941#955#945' '#928#945#953#948#953#959#973' - '#956#945#952#942#956#945#964#945
     TabOrder = 21
     OnClick = Button5Click
+  end
+  object DBLookupComboBox3: TDBLookupComboBox
+    Left = 449
+    Top = 395
+    Width = 71
+    Height = 25
+    DataField = 'cat_debit_id'
+    DataSource = DataSource1
+    KeyField = 'id'
+    ListField = 'Cat_Debit'
+    ListSource = DataSourceDebit_Cat
+    TabOrder = 22
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -5591,7 +5684,7 @@ object frmProgramDay: TfrmProgramDay
     SQL.Strings = (
       
         'SELECT id, CONCAT(lastname, '#39'  '#39', firstname) AS FullNameTeacher ' +
-        ' FROM teachers')
+        ' FROM teachers ORDER BY LASTNAME')
     Left = 112
     Top = 584
   end
@@ -5607,24 +5700,30 @@ object frmProgramDay: TfrmProgramDay
     OnNewRecord = FDQuery1NewRecord
     Connection = FDConnection1
     SQL.Strings = (
-      'SELECT'
+      'SELECT '
       '  P.id,'
       '  P.date AS Imerominia,'
       '  P.time AS ora,'
-      '  P.kids_id as kids_id,'
-      '  p.teachers_id as teachers_id,'
-      '  p.replacement as replacement,'
+      '  P.kids_id AS kids_id,'
+      '  P.teachers_id AS teachers_id,'
+      '  P.replacement AS replacement,'
       '  T.lastname AS Therapeutis_name,'
       '  K.lastname AS Paidi_Eponymo_name,'
       '  P.debit AS Xreosi,'
       '  P.debit2 AS Xreosi2,'
-      '  P.absence AS absence'
-      'FROM'
+      '  P.absence AS absence,'
+      '  P.cat_debit_id AS cat_debit_id,  '
+      '  CD.Cat_Debit AS Debit_lesson       '
+      'FROM '
       '  PROGRAM P'
-      'LEFT JOIN'
+      'LEFT JOIN '
       '  teachers T ON P.teachers_id = T.id'
-      'LEFT JOIN'
-      '  kids K ON P.kids_id = K.id;')
+      'LEFT JOIN '
+      '  kids K ON P.kids_id = K.id'
+      'LEFT JOIN '
+      
+        '  cat_debit CD ON P.cat_debit_id = CD.ID ORDER BY IMEROMINIA DES' +
+        'C;')
     Left = 232
     Top = 584
     object FDQuery1id: TFDAutoIncField
@@ -5671,6 +5770,18 @@ object frmProgramDay: TfrmProgramDay
       FieldName = 'replacement'
       Origin = 'replacement'
     end
+    object FDQuery1cat_debit_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cat_debit_id'
+      Origin = 'cat_debit_id'
+    end
+    object FDQuery1Debit_lesson: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'Debit_lesson'
+      Origin = 'Cat_Debit'
+      ProviderFlags = []
+      ReadOnly = True
+    end
   end
   object FDQueryKid: TFDQuery
     Active = True
@@ -5716,7 +5827,7 @@ object frmProgramDay: TfrmProgramDay
       '   AND P.date BETWEEN :StartDate AND :EndDate'
       '   AND ( P.absence = :SelectedAbsence'
       '   OR P.replacement =:SelectedReplacement)'
-      '   order by p.date')
+      '   order by p.id')
     Left = 656
     Top = 16
     ParamData = <
@@ -5781,34 +5892,85 @@ object frmProgramDay: TfrmProgramDay
     Top = 86
   end
   object FDQueryProgramKid: TFDQuery
+    Active = True
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT '
-      '    k.lastname AS kid_lastname,'
-      '    k.fistname AS kid_firstname,'
-      '    p.date AS program_date,'
-      '    p.time AS program_time,'
-      '    t.lastname AS teacher_lastname'
-      'FROM '
-      '    KIDS k'
-      'JOIN '
-      '    PROGRAM p ON k.id = p.kids_id'
-      'JOIN '
-      '    TEACHERS t ON p.teachers_id = t.id'
-      'WHERE K.ID= :SelectedKids'
-      'ORDER BY '
-      '    k.lastname ASC,   -- 1. '#927#956#945#948#959#960#959#943#951#963#951' '#945#957#940' '#949#960#943#952#949#964#959' '#960#945#953#948#953#959#973
-      '    k.fistname ASC,   -- 2. '#927#956#945#948#959#960#959#943#951#963#951' '#945#957#940' '#972#957#959#956#945' '#960#945#953#948#953#959#973
+      '    T.Imerominia,'
+      '    T.FullName,'
+      '    T.Eidos_Kinisis,'
+      '    T.Perigrafi,'
+      '    T.Xreosi,'
+      '    T.Pistosi,'
+      '    '
+      '    -- '#913#960#955#942' '#948#953#945#966#959#961#940' '#964#951#962' '#963#965#947#954#949#954#961#953#956#941#957#951#962' '#947#961#945#956#956#942#962' ('#928#943#963#964#969#963#951' - '#935#961#941#969#963#951')'
+      '    (T.Xreosi- T.Pistosi ) AS Diafora_Grammis,'
+      '    '
+      '    -- '#928#929#927#927#916#917#933#932#921#922#927' '#933#928#927#923#927#921#928#927' ('#932#961#941#967#959#957' '#931#973#957#959#955#959')'
       
-        '    p.date DESC,      -- 3. '#932#945#958#953#957#972#956#951#963#951' '#951#956#949#961#959#956#951#957#943#945#962' ('#945#960#972' '#964#959' '#960#953#959' '#960 +
-        #961#972#963#966#945#964#959')'
-      '    t.lastname ASC;')
+        '    SUM( T.Xreosi - T.Pistosi ) OVER (ORDER BY T.Imerominia ASC)' +
+        ' AS Trexon_Ypoloipo'
+      ''
+      'FROM ('
+      '    -- ---------------------------------------------------------'
+      '    -- '#924#917#929#927#931' 1'#959': '#927#921' '#935#929#917#937#931#917#921#931' ('#913#960#972' '#964#959' '#928#961#972#947#961#945#956#956#945' / '#920#949#961#945#960#949#943#949#962')'
+      '    -- ---------------------------------------------------------'
+      '    SELECT '
+      '        p.date AS Imerominia,'
+      '        CONCAT(k.lastname, '#39' '#39', k.fistname) AS FullName,'
+      '        '#39#920#949#961#945#960#949#943#945#39' AS Eidos_Kinisis,'
+      '        t.lastname AS Perigrafi,'
+      '        CD.Cat_Debit AS Xreosi,             '
+      '        0 AS Pistosi                        '
+      '    FROM '
+      '        KIDS k'
+      '    JOIN '
+      '        PROGRAM p ON k.id = p.kids_id'
+      '    JOIN '
+      '        TEACHERS t ON p.teachers_id = t.id'
+      '    LEFT JOIN '
+      '        cat_debit CD ON p.cat_debit_id = CD.ID'
+      '    WHERE '
+      '        k.ID = :SelectedKids'
+      '        AND p.ABSENCE = 0'
+      ''
+      '    UNION ALL'
+      ''
+      '    -- ---------------------------------------------------------'
+      '    -- '#924#917#929#927#931' 2'#959': '#927#921' '#928#921#931#932#937#931#917#921#931' & '#933#928#927#923#927#921#928#913' ('#913#960#972' '#964#953#962' '#913#960#959#948#949#943#958#949#953#962')'
+      '    -- ---------------------------------------------------------'
+      '    SELECT '
+      '        r.payment_date AS Imerominia,'
+      '        CONCAT(k.lastname, '#39' '#39', k.fistname) AS FullName,'
+      '        '#39#917#943#963#960#961#945#958#951' / '#933#960#972#955#959#953#960#959#39' AS Eidos_Kinisis,'
+      '        '
+      '        -- '#917#916#937' '#917#921#925#913#921' '#919' '#913#923#923#913#915#919' '#915#921#913' '#932#921#931' '#931#919#924#917#921#937#931#917#921#931' --'
+      
+        '        IF(r.notes IS NULL OR r.notes = '#39#39', '#39#928#955#951#961#969#956#942' / '#904#957#945#957#964#953#39', ' +
+        'r.notes) AS Perigrafi,'
+      '        '
+      '        0 AS Xreosi,                        '
+      '        r.amount AS Pistosi                 '
+      '    FROM '
+      '        receipts r '
+      '    JOIN '
+      '        kids k ON r.kid_id = k.id'
+      '    WHERE '
+      '        r.kid_id =:SelectedKids'
+      ''
+      ') AS T'
+      ''
+      '-- '#932#917#923#921#922#919' '#932#913#926#921#925#927#924#919#931#919
+      'ORDER BY '
+      '    T.Imerominia ASC;')
     Left = 640
     Top = 128
     ParamData = <
       item
         Name = 'SELECTEDKIDS'
+        DataType = ftString
         ParamType = ptInput
+        Value = '0'
       end>
   end
   object dtsProgramKid: TDataSource
@@ -5859,6 +6021,57 @@ object frmProgramDay: TfrmProgramDay
       end
       item
         Name = 'SELECTEDABSENCE'
+        DataType = ftString
+        ParamType = ptInput
+        Value = '0'
+      end>
+  end
+  object FDQueryDebit_Cat: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      'SELECT  *  FROM cat_debit')
+    Left = 384
+    Top = 440
+  end
+  object DataSourceDebit_Cat: TDataSource
+    DataSet = FDQueryDebit_Cat
+    Left = 944
+    Top = 528
+  end
+  object FDQueryProgramKid_backup: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      'SELECT '
+      '    k.lastname AS kid_lastname,'
+      '    k.fistname AS kid_firstname,'
+      '    p.date AS program_date,'
+      '    p.time AS program_time,'
+      '    t.lastname AS teacher_lastname,'
+      '    p.cat_debit_id AS cat_debit_id,'
+      '    CD.Cat_Debit AS Kathgoria_Xreosis'
+      'FROM '
+      '    KIDS k'
+      'JOIN '
+      '    PROGRAM p ON k.id = p.kids_id'
+      'JOIN '
+      '    TEACHERS t ON p.teachers_id = t.id'
+      'LEFT JOIN '
+      '    cat_debit CD ON p.cat_debit_id = CD.ID'
+      'WHERE '
+      '    k.ID = :SelectedKids '
+      '    AND p.ABSENCE = 0'
+      'ORDER BY '
+      '    k.lastname ASC,   -- 1. '#927#956#945#948#959#960#959#943#951#963#951' '#945#957#940' '#949#960#943#952#949#964#959' '#960#945#953#948#953#959#973
+      '    k.fistname ASC,   -- 2. '#927#956#945#948#959#960#959#943#951#963#951' '#945#957#940' '#972#957#959#956#945' '#960#945#953#948#953#959#973
+      '    p.date DESC,      -- 3. '#932#945#958#953#957#972#956#951#963#951' '#951#956#949#961#959#956#951#957#943#945#962
+      '    t.lastname ASC;')
+    Left = 1016
+    Top = 152
+    ParamData = <
+      item
+        Name = 'SELECTEDKIDS'
         DataType = ftString
         ParamType = ptInput
         Value = '0'
