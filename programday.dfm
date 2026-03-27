@@ -78,6 +78,7 @@ object frmProgramDay: TfrmProgramDay
     Height = 25
     DataSource = DataSource1
     TabOrder = 0
+    OnClick = DBNavigator1Click
   end
   object DBLookupComboBox1: TDBLookupComboBox
     Left = 132
@@ -90,6 +91,7 @@ object frmProgramDay: TfrmProgramDay
     ListField = 'FullName'
     ListSource = DataSourceKid
     TabOrder = 1
+    OnCloseUp = DBLookupComboBox1CloseUp
     OnDropDown = DBLookupComboBox1DropDown
   end
   object DBGrid1: TDBGrid
@@ -249,34 +251,37 @@ object frmProgramDay: TfrmProgramDay
     Top = 64
     Width = 301
     Height = 25
+    CharCase = ecUpperCase
     ParentShowHint = False
     ShowHint = True
     TabOrder = 10
-    TextHint = #920#949#961#945#960#949#965#964#942#962
+    TextHint = #920#917#929#913#928#917#933#932#919#931
   end
   object edtSearch2: TEdit
     Left = 132
     Top = 95
     Width = 301
     Height = 25
+    CharCase = ecUpperCase
     ParentShowHint = False
     ShowHint = True
     TabOrder = 11
-    TextHint = #928#945#953#948#943
+    TextHint = #928#913#921#916#921
   end
   object edtSearch3: TEdit
     Left = 132
     Top = 126
     Width = 301
     Height = 25
+    CharCase = ecUpperCase
     ParentShowHint = False
     ShowHint = True
     TabOrder = 12
-    TextHint = #919#956#949#961#959#956#951#957#943#945
+    TextHint = #919#924#917#929#927#924#919#925#921#913
   end
   object RLReport1: TRLReport
-    Left = 326
-    Top = 536
+    Left = 320
+    Top = 592
     Width = 794
     Height = 1123
     DataSource = dtsPrint
@@ -3814,8 +3819,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button4Click
   end
   object RLReport3: TRLReport
-    Left = 148
-    Top = 513
+    Left = 268
+    Top = 612
     Width = 794
     Height = 1123
     DataSource = dtsProgramKid
@@ -5661,6 +5666,14 @@ object frmProgramDay: TfrmProgramDay
     ListSource = DataSourceDebit_Cat
     TabOrder = 22
   end
+  object CheckBox1: TCheckBox
+    Left = 347
+    Top = 393
+    Width = 17
+    Height = 24
+    TabOrder = 23
+    OnClick = CheckBox1Click
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=MYDB'
@@ -6076,5 +6089,22 @@ object frmProgramDay: TfrmProgramDay
         ParamType = ptInput
         Value = '0'
       end>
+  end
+  object FDQueryFindLastCharge: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'SELECT  *  FROM cat_debit')
+    Left = 512
+    Top = 440
+  end
+  object FDQueryFindTeacher: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'SELECT id, CONCAT(lastname, '#39'  '#39', firstname) AS FullNameTeacher ' +
+        ' FROM teachers ORDER BY LASTNAME')
+    Left = 960
+    Top = 352
   end
 end

@@ -232,6 +232,7 @@ object FrmParent: TFrmParent
     Top = 64
     Width = 301
     Height = 25
+    CharCase = ecUpperCase
     TabOrder = 10
   end
   object FDConnection1: TFDConnection

@@ -91,6 +91,19 @@ type
     RLLabel17: TRLLabel;
     RLImage4: TRLImage;
     RLLabel18: TRLLabel;
+    Button4: TButton;
+    FDQueryBalance: TFDQuery;
+    DtSBalance: TDataSource;
+    RLReport1: TRLReport;
+    RLBand9: TRLBand;
+    RLLabel12: TRLLabel;
+    RLBand10: TRLBand;
+    RLDraw3: TRLDraw;
+    RLDBText12: TRLDBText;
+    RLDBText13: TRLDBText;
+    RLBand12: TRLBand;
+    RLLabel13: TRLLabel;
+    RLImage3: TRLImage;
 
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
@@ -103,6 +116,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure dtsNextAPYDataChange(Sender: TObject; Field: TField);
+    procedure Button4Click(Sender: TObject);
 
 
   private
@@ -223,6 +237,45 @@ begin
   FDQueryPrintSum.Open;
   //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrintSum.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
   frmReceipts.RLReport2.preview;
+
+
+end;
+
+procedure TfrmReceipts.Button4Click(Sender: TObject);
+var
+ SelectedDateID: TDateTime;
+ FirstDay, LastDay: TDateTime;
+begin
+  if Trim(edtSearch3.Text) <> '' then
+    begin
+      // Προσπαθούμε να μετατρέψουμε το κείμενο σε κανονική Ημερομηνία
+      if TryStrToDate(Trim(edtSearch3.Text), FirstDay) then
+        begin
+          FDQueryBalance.Close;
+          //FDQueryNextAPY.ParamByName('FirstDay').DataType := ftDate;
+          //FDQueryNextAPY.ParamByName('FirstDay').AsDate := FirstDay;
+         // FDQueryNextAPY.ParamByName('LastDay').DataType := ftDate;
+          //FDQueryNextAPY.ParamByName('LastDay').AsDate := FirstDay;
+          FDQueryBalance.Open;
+        end
+        else
+        begin
+          ShowMessage('Παρακαλώ εισάγετε μια έγκυρη μορφή ημερομηνίας (π.χ. 15/05/2026).');
+        end;
+    end
+    else
+      begin
+          FDQueryBalance.Close;
+          FirstDay := StartOfTheMonth(Date);
+          LastDay  := EndOfTheMonth(Date);
+         // FDQueryNextAPY.ParamByName('FirstDay').DataType := ftDate;
+        //  FDQueryNextAPY.ParamByName('FirstDay').AsDate := FirstDay;
+        //  FDQueryNextAPY.ParamByName('LastDay').DataType := ftDate;
+        //  FDQueryNextAPY.ParamByName('LastDay').AsDate := LastDay;
+        FDQueryBalance.Open;
+
+    end;
+  frmReceipts.RLReport1.preview;
 
 
 end;
