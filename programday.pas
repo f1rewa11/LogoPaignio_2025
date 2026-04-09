@@ -128,6 +128,36 @@ type
     Label6: TLabel;
     CheckBox1: TCheckBox;
     FDQueryFindTeacher: TFDQuery;
+    Button6: TButton;
+    FDQueryPrintSumTeacherByDate: TFDQuery;
+    DtSPrintSumTeacherByDate: TDataSource;
+    RLReport4: TRLReport;
+    RLBand13: TRLBand;
+    RLLabel18: TRLLabel;
+    RLDBText15: TRLDBText;
+    RLBand14: TRLBand;
+    RLDBText16: TRLDBText;
+    RLDraw4: TRLDraw;
+    RLSystemInfo2: TRLSystemInfo;
+    RLBand16: TRLBand;
+    RLLabel20: TRLLabel;
+    RLImage4: TRLImage;
+    RLLabel21: TRLLabel;
+    RLLabel19: TRLLabel;
+    RLDBText17: TRLDBText;
+    RLDBResult1: TRLDBResult;
+    FDQueryProgramKid_backupkid_lastname: TWideStringField;
+    FDQueryProgramKid_backupkid_firstname: TWideStringField;
+    FDQueryProgramKid_backupprogram_date: TDateField;
+    FDQueryProgramKid_backupprogram_time: TTimeField;
+    FDQueryProgramKid_backupteacher_lastname: TWideStringField;
+    FDQueryProgramKid_backupcat_debit_id: TIntegerField;
+    FDQueryProgramKid_backupKathgoria_Xreosis: TIntegerField;
+    RLBand15: TRLBand;
+    FDQueryPrintSumTeacherByDateImerominia: TDateField;
+    FDQueryPrintSumTeacherByDateTherapeutis_name: TWideStringField;
+    FDQueryPrintSumTeacherByDatePlithos_Rantevou: TLargeintField;
+    lblFinalSum: TRLLabel;
     procedure DateTimePicker2Change(Sender: TObject);
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
@@ -147,6 +177,10 @@ type
     procedure DBLookupComboBox1CloseUp(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
+    procedure Button6Click(Sender: TObject);
+    procedure RLReport4BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand14BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand15BeforePrint(Sender: TObject; var PrintIt: Boolean);
 
 
 
@@ -163,8 +197,10 @@ implementation
 
 {$R *.dfm}
 
-uses logopaignio;
 
+uses logopaignio;
+  var
+  TotalMonthSum: Integer;
 
 
 
@@ -338,6 +374,33 @@ begin
   RLLabel3.Caption := 'Χρεωμένα μαθήματα ';
   //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
   frmProgramDay.RLReport3.preview;
+end;
+
+procedure TfrmProgramDay.Button6Click(Sender: TObject);
+var
+ SelectedTeacherID: Integer; // 1. Δηλώνουμε τη μεταβλητή εδώ
+ SelectedDateID: TDateTime;
+ FirstDay, LastDay: TDateTime;
+
+begin
+  SelectedTeacherID := FDQuery1.FieldByName('Teachers_id').AsInteger;
+  SelectedDateID := FDQuery1.FieldByName('Imerominia').AsDateTime;
+  FirstDay := StartOfTheMonth(SelectedDateID);
+  LastDay  := EndOfTheMonth(SelectedDateID);
+  FDQueryPrintSumTeacherByDate.Close;
+  FDQueryPrintSumTeacherByDate.ParamByName('SelectedTeacher').AsInteger := SelectedTeacherID;
+  FDQueryPrintSumTeacherByDate.ParamByName('StartDate').AsDate := FirstDay;
+  FDQueryPrintSumTeacherByDate.ParamByName('EndDate').AsDate   := LastDay;
+  //FDQueryPrint.ParamByName('SelectedDate').AsDate := SelectedDateID;
+  //FDQueryPrintSumTeacherByDate.ParamByName('SelectedAbsence').AsInteger := 0;
+ // FDQueryPrintSumTeacherByDate.ParamByName('SelectedReplacement').AsInteger := 1;
+  dtsPrintSumTeacherByDate.DataSet := FDQueryPrintSumTeacherByDate;
+  FDQueryPrintSumTeacherByDate.Open;
+  RLLabel3.Caption := 'Χρεωμένα μαθήματα ';
+  //ShowMessage('Βρέθηκαν ' + IntToStr(FDQueryPrint.RecordCount) + ' ΕΓΓΡΑΦΕΣ.');
+  frmProgramDay.RLReport4.preview;
+
+
 end;
 
 procedure TfrmProgramDay.CheckBox1Click(Sender: TObject);
@@ -529,5 +592,23 @@ begin
 end;
 
 
+
+procedure TfrmProgramDay.RLBand14BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+TotalMonthSum := TotalMonthSum + FDQueryPrintSumTeacherByDate.FieldByName('Plithos_Rantevou').AsInteger;
+end;
+
+procedure TfrmProgramDay.RLBand15BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+   lblFinalSum.Caption := IntToStr(TotalMonthSum);
+end;
+
+procedure TfrmProgramDay.RLReport4BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+   TotalMonthSum := 0;
+end;
 
 end.

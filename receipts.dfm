@@ -1972,8 +1972,8 @@ object frmReceipts: TfrmReceipts
     TextHint = #919#924#917#929#927#924#919#925#921#913
   end
   object RLReport2: TRLReport
-    Left = 157
-    Top = 652
+    Left = 104
+    Top = 244
     Width = 794
     Height = 1123
     DataSource = dtsPrintSum
@@ -3768,8 +3768,8 @@ object frmReceipts: TfrmReceipts
     OnClick = Button2Click
   end
   object RLReport3: TRLReport
-    Left = 644
-    Top = 315
+    Left = 319
+    Top = 561
     Width = 794
     Height = 1123
     DataSource = dtsNextAPY
@@ -5499,8 +5499,8 @@ object frmReceipts: TfrmReceipts
     OnClick = Button4Click
   end
   object RLReport1: TRLReport
-    Left = 103
-    Top = 139
+    Left = 224
+    Top = 561
     Width = 794
     Height = 1123
     DataSource = DtSBalance
