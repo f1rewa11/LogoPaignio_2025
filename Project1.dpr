@@ -7,7 +7,8 @@ uses
   programday in 'programday.pas' {frmProgramDay},
   parent in 'parent.pas' {FrmParent},
   kids in 'kids.pas' {frmKids},
-  receipts in 'receipts.pas' {frmReceipts};
+  receipts in 'receipts.pas' {frmReceipts},
+  Vevaiosi in 'Vevaiosi.pas' {frmVevaiosi};
 
 {$R *.res}
 
@@ -20,5 +21,6 @@ begin
   Application.CreateForm(TFrmParent, FrmParent);
   Application.CreateForm(TfrmKids, frmKids);
   Application.CreateForm(TfrmReceipts, frmReceipts);
+  Application.CreateForm(TfrmVevaiosi, frmVevaiosi);
   Application.Run;
 end.

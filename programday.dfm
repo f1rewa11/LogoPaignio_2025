@@ -280,8 +280,8 @@ object frmProgramDay: TfrmProgramDay
     TextHint = #919#924#917#929#927#924#919#925#921#913
   end
   object RLReport1: TRLReport
-    Left = 278
-    Top = 497
+    Left = -155
+    Top = 471
     Width = 794
     Height = 1123
     DataSource = dtsPrint
@@ -2065,8 +2065,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button3Click
   end
   object RLReport2: TRLReport
-    Left = 216
-    Top = 471
+    Left = 34
+    Top = 463
     Width = 794
     Height = 1123
     DataSource = dtsPrintCount
@@ -3826,8 +3826,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button4Click
   end
   object RLReport3: TRLReport
-    Left = 422
-    Top = 644
+    Left = 159
+    Top = 532
     Width = 794
     Height = 1123
     DataSource = dtsProgramKid
@@ -5691,8 +5691,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button6Click
   end
   object RLReport4: TRLReport
-    Left = 335
-    Top = 39
+    Left = 34
+    Top = 494
     Width = 794
     Height = 1123
     DataSource = DtSPrintSumTeacherByDate
@@ -7679,67 +7679,46 @@ object frmProgramDay: TfrmProgramDay
       '    T.Perigrafi,'
       '    T.Xreosi,'
       '    T.Pistosi,'
-      '    '
-      '    -- '#913#960#955#942' '#948#953#945#966#959#961#940' '#964#951#962' '#963#965#947#954#949#954#961#953#956#941#957#951#962' '#947#961#945#956#956#942#962' ('#928#943#963#964#969#963#951' - '#935#961#941#969#963#951')'
-      '    (T.Xreosi- T.Pistosi ) AS Diafora_Grammis,'
-      '    '
-      '    -- '#928#929#927#927#916#917#933#932#921#922#927' '#933#928#927#923#927#921#928#927' ('#932#961#941#967#959#957' '#931#973#957#959#955#959')'
+      '    (T.Xreosi - T.Pistosi) AS Diafora_Grammis,'
       
-        '    SUM( T.Xreosi - T.Pistosi ) OVER (ORDER BY T.Imerominia ASC)' +
-        ' AS Trexon_Ypoloipo'
-      ''
+        '    -- '#917#948#974' '#951' '#948#953#972#961#952#969#963#951': '#928#961#959#963#952#942#954#951' ROWS... '#947#953#945' '#965#960#959#955#959#947#953#963#956#972' '#945#957#940' '#947#961#945#956#956 +
+        #942
+      '    SUM(T.Xreosi - T.Pistosi) OVER ('
+      '        ORDER BY T.Imerominia ASC, T.Priority ASC '
+      '        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW'
+      '    ) AS Trexon_Ypoloipo'
       'FROM ('
-      '    -- ---------------------------------------------------------'
-      '    -- '#924#917#929#927#931' 1'#959': '#927#921' '#935#929#917#937#931#917#921#931' ('#913#960#972' '#964#959' '#928#961#972#947#961#945#956#956#945' / '#920#949#961#945#960#949#943#949#962')'
-      '    -- ---------------------------------------------------------'
       '    SELECT '
       '        p.date AS Imerominia,'
       '        CONCAT(k.lastname, '#39' '#39', k.fistname) AS FullName,'
       '        '#39#920#949#961#945#960#949#943#945#39' AS Eidos_Kinisis,'
       '        t.lastname AS Perigrafi,'
       '        CD.Cat_Debit AS Xreosi,             '
-      '        0 AS Pistosi                        '
-      '    FROM '
-      '        KIDS k'
-      '    JOIN '
-      '        PROGRAM p ON k.id = p.kids_id'
-      '    JOIN '
-      '        TEACHERS t ON p.teachers_id = t.id'
-      '    LEFT JOIN '
-      '        cat_debit CD ON p.cat_debit_id = CD.ID'
-      '    WHERE '
-      '        k.ID = :SelectedKids'
-      '        AND p.ABSENCE = 0'
+      '        0 AS Pistosi,'
+      '        1 AS Priority  -- '#928#961#959#964#949#961#945#953#972#964#951#964#945' 1 '#947#953#945' '#967#961#949#974#963#949#953#962
+      '    FROM KIDS k'
+      '    JOIN PROGRAM p ON k.id = p.kids_id'
+      '    JOIN TEACHERS t ON p.teachers_id = t.id'
+      '    LEFT JOIN cat_debit CD ON p.cat_debit_id = CD.ID'
+      '    WHERE k.ID =  :SelectedKids AND p.ABSENCE = 0'
       ''
       '    UNION ALL'
       ''
-      '    -- ---------------------------------------------------------'
-      '    -- '#924#917#929#927#931' 2'#959': '#927#921' '#928#921#931#932#937#931#917#921#931' & '#933#928#927#923#927#921#928#913' ('#913#960#972' '#964#953#962' '#913#960#959#948#949#943#958#949#953#962')'
-      '    -- ---------------------------------------------------------'
       '    SELECT '
       '        r.payment_date AS Imerominia,'
       '        CONCAT(k.lastname, '#39' '#39', k.fistname) AS FullName,'
       '        '#39#917#943#963#960#961#945#958#951' / '#933#960#972#955#959#953#960#959#39' AS Eidos_Kinisis,'
-      '        '
-      '        -- '#917#916#937' '#917#921#925#913#921' '#919' '#913#923#923#913#915#919' '#915#921#913' '#932#921#931' '#931#919#924#917#921#937#931#917#921#931' --'
       
         '        IF(r.notes IS NULL OR r.notes = '#39#39', '#39#928#955#951#961#969#956#942' / '#904#957#945#957#964#953#39', ' +
         'r.notes) AS Perigrafi,'
-      '        '
       '        0 AS Xreosi,                        '
-      '        r.amount AS Pistosi                 '
-      '    FROM '
-      '        receipts r '
-      '    JOIN '
-      '        kids k ON r.kid_id = k.id'
-      '    WHERE '
-      '        r.kid_id =:SelectedKids'
-      ''
+      '        r.amount AS Pistosi,'
+      '        2 AS Priority  -- '#928#961#959#964#949#961#945#953#972#964#951#964#945' 2 '#947#953#945' '#960#955#951#961#969#956#941#962
+      '    FROM receipts r '
+      '    JOIN kids k ON r.kid_id = k.id'
+      '    WHERE r.kid_id =  :SelectedKids'
       ') AS T'
-      ''
-      '-- '#932#917#923#921#922#919' '#932#913#926#921#925#927#924#919#931#919
-      'ORDER BY '
-      '    T.Imerominia ASC;')
+      'ORDER BY T.Imerominia ASC, T.Priority ASC;')
     Left = 640
     Top = 128
     ParamData = <
