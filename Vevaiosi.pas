@@ -17,7 +17,6 @@ type
     DBLookupComboBox2: TDBLookupComboBox;
     DateTimePicker1: TDateTimePicker;
     DateTimePicker2: TDateTimePicker;
-    btnSearchClick1: TButton;
     FDMemTable1: TFDMemTable;
     DBGrid1: TDBGrid;
     dsReport: TDataSource;
@@ -35,6 +34,10 @@ type
     edtPlithosPsych: TLabeledEdit;
     edtPlithosErgo: TLabeledEdit;
     edtPlithosLogo: TLabeledEdit;
+    btnSearchClick1: TButton;
+    qryKidsList: TFDQuery;
+    dsKidsList: TDataSource;
+    procedure btnSearchClick1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +50,7 @@ var
 implementation
 
 {$R *.dfm}
-
+uses System.DateUtils;
 
 // -----------------------------------------------------------------------------
 // ΒΟΗΘΗΤΙΚΗ ΣΥΝΑΡΤΗΣΗ: Μετατρέπει την ημερομηνία στην αντίστοιχη Ελληνική Ημέρα
@@ -67,10 +70,10 @@ begin
   end;
 end;
 
-// -----------------------------------------------------------------------------
-// ΚΟΥΜΠΙ ΑΝΑΖΗΤΗΣΗΣ: Φέρνει τα δεδομένα και γεμίζει τον εικονικό πίνακα
-// -----------------------------------------------------------------------------
-procedure TfrmVevaiosi.btnSearchClick(Sender: TObject);
+
+
+
+procedure TfrmVevaiosi.btnSearchClick1Click(Sender: TObject);
 var
   i, MaxRows: Integer;
 begin
@@ -112,7 +115,7 @@ begin
   qryLogo.ParamByName('Plithos').AsInteger := StrToIntDef(edtPlithosLogo.Text, 0);
   qryLogo.Open;
 
-  // 5. Βρίσκουμε το "ταβάνι" (Τον μεγαλύτερο αριθμό γραμμών από τις 3 θεραπείες)
+  // 5. Βρίσκουμε το "ταβάνι"
   MaxRows := qryPsych.RecordCount;
   if qryErgo.RecordCount > MaxRows then MaxRows := qryErgo.RecordCount;
   if qryLogo.RecordCount > MaxRows then MaxRows := qryLogo.RecordCount;
@@ -127,7 +130,6 @@ begin
     FDMemTable1.Append;
     FDMemTable1.FieldByName('AA').AsInteger := i;
 
-    // Προσθήκη Ψυχοθεραπείας (αν υπάρχουν ακόμα γραμμές)
     if not qryPsych.Eof then
     begin
       FDMemTable1.FieldByName('Psych_Date').AsDateTime := qryPsych.FieldByName('Imerominia').AsDateTime;
@@ -135,7 +137,6 @@ begin
       qryPsych.Next;
     end;
 
-    // Προσθήκη Εργοθεραπείας (αν υπάρχουν ακόμα γραμμές)
     if not qryErgo.Eof then
     begin
       FDMemTable1.FieldByName('Ergo_Date').AsDateTime := qryErgo.FieldByName('Imerominia').AsDateTime;
@@ -143,7 +144,6 @@ begin
       qryErgo.Next;
     end;
 
-    // Προσθήκη Λογοθεραπείας (αν υπάρχουν ακόμα γραμμές)
     if not qryLogo.Eof then
     begin
       FDMemTable1.FieldByName('Logo_Date').AsDateTime := qryLogo.FieldByName('Imerominia').AsDateTime;
@@ -151,16 +151,8 @@ begin
       qryLogo.Next;
     end;
 
-    FDMemTable1.Post; // Αποθήκευση της γραμμής στον εικονικό πίνακα
+    FDMemTable1.Post;
   end;
-end;
-
-// -----------------------------------------------------------------------------
-// ΚΟΥΜΠΙ ΕΚΤΥΠΩΣΗΣ: Ανοίγει την προεπισκόπηση του FortesReport
-// -----------------------------------------------------------------------------
-procedure TfrmVevaiosi.btnPrintClick(Sender: TObject);
-begin
-  RLReport1.Preview;
 end;
 
 end.

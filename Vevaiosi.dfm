@@ -16,9 +16,9 @@
     Top = 24
     Width = 209
     Height = 23
-    DataField = 'teachers_id'
     KeyField = 'id'
-    ListField = 'FullNameTeacher'
+    ListField = 'FullName'
+    ListSource = dsKidsList
     TabOrder = 0
   end
   object DateTimePicker1: TDateTimePicker
@@ -39,15 +39,6 @@
     Time = 0.640056898148031900
     TabOrder = 2
   end
-  object btnSearchClick1: TButton
-    Left = 719
-    Top = 47
-    Width = 75
-    Height = 25
-    Caption = #913#957#945#950#942#964#951#963#951
-    DragCursor = crHandPoint
-    TabOrder = 3
-  end
   object DBGrid1: TDBGrid
     Left = 20
     Top = 213
@@ -55,7 +46,7 @@
     Height = 252
     DataSource = dsReport
     ReadOnly = True
-    TabOrder = 4
+    TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12
@@ -106,7 +97,7 @@
     EditLabel.Width = 32
     EditLabel.Height = 15
     EditLabel.Caption = #936#933#935#927
-    TabOrder = 5
+    TabOrder = 4
     Text = ''
   end
   object edtPlithosErgo: TLabeledEdit
@@ -117,7 +108,7 @@
     EditLabel.Width = 28
     EditLabel.Height = 15
     EditLabel.Caption = #917#929#915#927
-    TabOrder = 6
+    TabOrder = 5
     Text = ''
   end
   object edtPlithosLogo: TLabeledEdit
@@ -128,8 +119,18 @@
     EditLabel.Width = 32
     EditLabel.Height = 15
     EditLabel.Caption = #923#927#915#927
-    TabOrder = 7
+    TabOrder = 6
     Text = ''
+  end
+  object btnSearchClick1: TButton
+    Left = 527
+    Top = 64
+    Width = 75
+    Height = 25
+    Caption = #913#957#945#950#942#964#951#963#951
+    DragCursor = crHandPoint
+    TabOrder = 7
+    OnClick = btnSearchClick1Click
   end
   object FDMemTable1: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
@@ -188,7 +189,7 @@
       '    FROM program p'
       '    JOIN teachers t ON p.teachers_id = t.id'
       '    WHERE p.kids_id = :KID '
-      '      AND t.eidikotita = :Eidikotita'
+      '      AND t.specialization_id = 3'
       '      AND p.date >= :DateFrom '
       '      AND p.date <= :DateTo '
       '      AND p.absence = 0'
@@ -233,10 +234,6 @@
         ParamType = ptInput
       end
       item
-        Name = 'EIDIKOTITA'
-        ParamType = ptInput
-      end
-      item
         Name = 'PLITHOS'
         ParamType = ptInput
       end>
@@ -261,7 +258,7 @@
       '    FROM program p'
       '    JOIN teachers t ON p.teachers_id = t.id'
       '    WHERE p.kids_id = :KID '
-      '      AND t.eidikotita = :Eidikotita'
+      '      AND t.specialization_id = 1'
       '      AND p.date >= :DateFrom '
       '      AND p.date <= :DateTo '
       '      AND p.absence = 0'
@@ -306,10 +303,6 @@
         ParamType = ptInput
       end
       item
-        Name = 'EIDIKOTITA'
-        ParamType = ptInput
-      end
-      item
         Name = 'PLITHOS'
         ParamType = ptInput
       end>
@@ -334,7 +327,7 @@
       '    FROM program p'
       '    JOIN teachers t ON p.teachers_id = t.id'
       '    WHERE p.kids_id = :KID '
-      '      AND t.eidikotita = :Eidikotita'
+      '      AND t.specialization_id = 2'
       '      AND p.date >= :DateFrom '
       '      AND p.date <= :DateTo '
       '      AND p.absence = 0'
@@ -380,10 +373,6 @@
         ParamType = ptInput
       end
       item
-        Name = 'EIDIKOTITA'
-        ParamType = ptInput
-      end
-      item
         Name = 'PLITHOS'
         ParamType = ptInput
       end>
@@ -398,5 +387,20 @@
     Connected = True
     Left = 176
     Top = 517
+  end
+  object qryKidsList: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'SELECT id, CONCAT(lastname, '#39' '#39', fistname) AS FullName FROM kids' +
+        ' order by lastname')
+    Left = 624
+    Top = 512
+  end
+  object dsKidsList: TDataSource
+    DataSet = qryKidsList
+    Left = 712
+    Top = 510
   end
 end

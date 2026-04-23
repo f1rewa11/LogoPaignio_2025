@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ToolWin, Vcl.ComCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ToolWin, Vcl.ComCtrls,
+  Vevaiosi;
 
 type
   TForm1 = class(TForm)
@@ -19,11 +20,13 @@ type
     ToolBar1: TToolBar;
     N7: TMenuItem;
     N8: TMenuItem;
+    N9: TMenuItem;
     procedure N3Click(Sender: TObject);
     procedure N6Click(Sender: TObject);
     procedure N5Click(Sender: TObject);
     procedure N7Click(Sender: TObject);
     procedure N8Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,6 +70,12 @@ begin
 
   // Την εμφανίζουμε
       frmReceipts.show
+end;
+
+procedure TForm1.N9Click(Sender: TObject);
+begin
+frmVevaiosi.show;
+
 end;
 
 end.

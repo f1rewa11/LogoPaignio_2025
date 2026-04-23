@@ -66,6 +66,18 @@ type
     FDQuery1end_gnomateysi: TIntegerField;
     FDQuery1opinion: TWideMemoField;
     FDQuery1opinion_2: TWideMemoField;
+    DBLookupErgoTeacher: TDBLookupComboBox;
+    DBLookupLogoTeacher: TDBLookupComboBox;
+    DBLookupPsycoTeacher: TDBLookupComboBox;
+    FDQueryFindErgoTeacher: TFDQuery;
+    FDQueryFindLogoTeacher: TFDQuery;
+    FDQueryFindPsycoTeacher: TFDQuery;
+    DataSourceErgoTeacher: TDataSource;
+    DataSourceLogoTeacher: TDataSource;
+    DataSourcePsycoTeacher: TDataSource;
+    FDQuery1Ergo_Teacher_id: TIntegerField;
+    FDQuery1Logo_Teacher_id: TIntegerField;
+    FDQuery1Psyco_Teacher_id: TIntegerField;
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DateTimePicker1DropDown(Sender: TObject);

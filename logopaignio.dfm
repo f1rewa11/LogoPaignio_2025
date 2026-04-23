@@ -167,6 +167,10 @@ object Form1: TForm1
     end
     object N4: TMenuItem
       Caption = #913#957#945#966#959#961#941#962
+      object N9: TMenuItem
+        Caption = #914#949#946#945#943#969#963#951' '#960#945#961#945#954#959#955#959#973#952#951#963#951#962
+        OnClick = N9Click
+      end
     end
     object N2: TMenuItem
       Caption = 'Utilities'

@@ -2065,8 +2065,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button3Click
   end
   object RLReport2: TRLReport
-    Left = 34
-    Top = 463
+    Left = 214
+    Top = 481
     Width = 794
     Height = 1123
     DataSource = dtsPrintCount
