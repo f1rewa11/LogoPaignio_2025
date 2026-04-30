@@ -2,7 +2,7 @@
   Left = 0
   Top = 0
   Caption = #904#954#948#959#963#951' '#914#949#946#945#943#969#963#951#962' '#928#945#961#945#954#959#955#959#973#952#951#963#951#962
-  ClientHeight = 678
+  ClientHeight = 679
   ClientWidth = 958
   Color = clActiveCaption
   Font.Charset = DEFAULT_CHARSET
@@ -20,6 +20,7 @@
     ListField = 'FullName'
     ListSource = dsKidsList
     TabOrder = 0
+    OnCloseUp = DBLookupComboBox2CloseUp
   end
   object DateTimePicker1: TDateTimePicker
     Left = 20
@@ -43,7 +44,7 @@
     Left = 20
     Top = 213
     Width = 857
-    Height = 252
+    Height = 284
     DataSource = dsReport
     ReadOnly = True
     TabOrder = 3
@@ -55,7 +56,7 @@
     Columns = <
       item
         Expanded = False
-        FieldName = #913#913
+        FieldName = 'AA'
         Visible = True
       end
       item
@@ -140,10 +141,10 @@
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 56
-    Top = 520
+    Left = 48
+    Top = 576
     object FDMemTable1ΑΑ: TIntegerField
-      FieldName = #913#913
+      FieldName = 'AA'
     end
     object FDMemTable1Psych_Day: TStringField
       FieldName = 'Psych_Day'
@@ -166,8 +167,8 @@
   end
   object dsReport: TDataSource
     DataSet = FDMemTable1
-    Left = 312
-    Top = 518
+    Left = 304
+    Top = 558
   end
   object qryErgo: TFDQuery
     Connection = FDConnection1
@@ -307,6 +308,32 @@
         ParamType = ptInput
       end>
   end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'Database=MYDB'
+      'User_Name=root'
+      'Password=69296929'
+      'Server=127.0.0.1'
+      'DriverID=MySQL')
+    Connected = True
+    Left = 176
+    Top = 565
+  end
+  object qryKidsList: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'SELECT id, CONCAT(lastname, '#39' '#39', fistname) AS FullName, next_dat' +
+        'e FROM kids order by lastname')
+    Left = 624
+    Top = 512
+  end
+  object dsKidsList: TDataSource
+    DataSet = qryKidsList
+    Left = 712
+    Top = 510
+  end
   object qryPsych: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
@@ -356,13 +383,12 @@
       'SELECT Imerominia '
       'FROM FinalSelection'
       'ORDER BY Imerominia ASC;')
-    Left = 416
-    Top = 512
+    Left = 392
+    Top = 504
     ParamData = <
       item
         Name = 'DATEFROM'
         ParamType = ptInput
-        Value = Null
       end
       item
         Name = 'DATETO'
@@ -376,31 +402,5 @@
         Name = 'PLITHOS'
         ParamType = ptInput
       end>
-  end
-  object FDConnection1: TFDConnection
-    Params.Strings = (
-      'Database=MYDB'
-      'User_Name=root'
-      'Password=69296929'
-      'Server=127.0.0.1'
-      'DriverID=MySQL')
-    Connected = True
-    Left = 176
-    Top = 517
-  end
-  object qryKidsList: TFDQuery
-    Active = True
-    Connection = FDConnection1
-    SQL.Strings = (
-      
-        'SELECT id, CONCAT(lastname, '#39' '#39', fistname) AS FullName FROM kids' +
-        ' order by lastname')
-    Left = 624
-    Top = 512
-  end
-  object dsKidsList: TDataSource
-    DataSet = qryKidsList
-    Left = 712
-    Top = 510
   end
 end

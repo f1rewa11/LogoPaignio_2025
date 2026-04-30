@@ -22,7 +22,6 @@ type
     dsReport: TDataSource;
     qryErgo: TFDQuery;
     qryLogo: TFDQuery;
-    qryPsych: TFDQuery;
     FDConnection1: TFDConnection;
     FDMemTable1ΑΑ: TIntegerField;
     FDMemTable1Psych_Day: TStringField;
@@ -37,7 +36,9 @@ type
     btnSearchClick1: TButton;
     qryKidsList: TFDQuery;
     dsKidsList: TDataSource;
+    qryPsych: TFDQuery;
     procedure btnSearchClick1Click(Sender: TObject);
+    procedure DBLookupComboBox2CloseUp(Sender: TObject);
   private
     { Private declarations }
   public
@@ -93,7 +94,6 @@ begin
   qryPsych.ParamByName('KID').AsInteger := DBLookupComboBox2.KeyValue;
   qryPsych.ParamByName('DateFrom').AsDate := DateTimePicker1.Date;
   qryPsych.ParamByName('DateTo').AsDate := DateTimePicker2.Date;
-  qryPsych.ParamByName('Eidikotita').AsString := 'ΨΥΧΟΛΟΓΟΣ';
   qryPsych.ParamByName('Plithos').AsInteger := StrToIntDef(edtPlithosPsych.Text, 0);
   qryPsych.Open;
 
@@ -102,7 +102,6 @@ begin
   qryErgo.ParamByName('KID').AsInteger := DBLookupComboBox2.KeyValue;
   qryErgo.ParamByName('DateFrom').AsDate := DateTimePicker1.Date;
   qryErgo.ParamByName('DateTo').AsDate := DateTimePicker2.Date;
-  qryErgo.ParamByName('Eidikotita').AsString := 'ΕΡΓΟΘΕΡΑΠΕΥΤΗΣ';
   qryErgo.ParamByName('Plithos').AsInteger := StrToIntDef(edtPlithosErgo.Text, 0);
   qryErgo.Open;
 
@@ -111,7 +110,6 @@ begin
   qryLogo.ParamByName('KID').AsInteger := DBLookupComboBox2.KeyValue;
   qryLogo.ParamByName('DateFrom').AsDate := DateTimePicker1.Date;
   qryLogo.ParamByName('DateTo').AsDate := DateTimePicker2.Date;
-  qryLogo.ParamByName('Eidikotita').AsString := 'ΛΟΓΟΘΕΡΑΠΕΥΤΗΣ';
   qryLogo.ParamByName('Plithos').AsInteger := StrToIntDef(edtPlithosLogo.Text, 0);
   qryLogo.Open;
 
@@ -155,5 +153,27 @@ begin
   end;
 end;
 
-end.
+procedure TfrmVevaiosi.DBLookupComboBox2CloseUp(Sender: TObject);
+begin
+// Ελέγχουμε αν όντως επιλέχθηκε κάποιο παιδί (να μην είναι κενό)
+  if not VarIsNull(DBLookupComboBox2.KeyValue) then
+  begin
+    // Ελέγχουμε αν υπάρχει καταχωρημένη ημερομηνία ΑΠΥ στη βάση
+    if not qryKidsList.FieldByName('next_date').IsNull then
+    begin
+      // 1. Βάζουμε στο "Έως" (Picker2) την ημερομηνία της επόμενης ΑΠΥ
+      DateTimePicker2.Date := qryKidsList.FieldByName('next_date').AsDateTime;
+
+      // 2. Βάζουμε στο "Από" (Picker1) την ημερομηνία του Picker2 ΜΕΙΟΝ 30 ημέρες!
+      DateTimePicker1.Date := DateTimePicker2.Date - 30;
+    end
+    else
+    begin
+      // Προαιρετικά: Αν το παιδί ΔΕΝ έχει καταχωρημένη ημερομηνία ΑΠΥ,
+      // βάζουμε ως "Έως" το σημερινό και ως "Από" 30 μέρες πίσω για ασφάλεια.
+      DateTimePicker2.Date := Date;
+      DateTimePicker1.Date := Date - 30;
+    end;
+  end;
+end;
 end.
