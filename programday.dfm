@@ -30,29 +30,29 @@ object frmProgramDay: TfrmProgramDay
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 40
-    Top = 395
+    Left = 44
+    Top = 499
     Width = 72
     Height = 17
     Caption = #920#949#961#945#960#949#965#964#942#962
   end
   object Label4: TLabel
-    Left = 42
-    Top = 440
+    Left = 46
+    Top = 544
     Width = 31
     Height = 17
     Caption = #928#945#953#948#943
   end
   object Label8: TLabel
-    Left = 612
-    Top = 440
+    Left = 616
+    Top = 544
     Width = 70
     Height = 17
     Caption = #919#956#949#961#959#956#951#957#943#945
   end
   object Label9: TLabel
-    Left = 612
-    Top = 395
+    Left = 616
+    Top = 499
     Width = 27
     Height = 17
     Caption = #911#961#945
@@ -65,15 +65,15 @@ object frmProgramDay: TfrmProgramDay
     Caption = #936#940#967#957#969' '#947#953#945' '
   end
   object Label6: TLabel
-    Left = 386
-    Top = 395
+    Left = 390
+    Top = 499
     Width = 47
     Height = 17
     Caption = #935#961#941#969#963#951
   end
   object DBNavigator1: TDBNavigator
-    Left = 40
-    Top = 536
+    Left = 44
+    Top = 640
     Width = 850
     Height = 25
     DataSource = DataSource1
@@ -81,8 +81,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = DBNavigator1Click
   end
   object DBLookupComboBox1: TDBLookupComboBox
-    Left = 132
-    Top = 440
+    Left = 136
+    Top = 544
     Width = 209
     Height = 25
     DataField = 'kids_id'
@@ -97,8 +97,8 @@ object frmProgramDay: TfrmProgramDay
   object DBGrid1: TDBGrid
     Left = 48
     Top = 173
-    Width = 857
-    Height = 186
+    Width = 979
+    Height = 308
     DataSource = DataSource1
     ReadOnly = True
     TabOrder = 2
@@ -165,8 +165,8 @@ object frmProgramDay: TfrmProgramDay
       end>
   end
   object DBLookupComboBox2: TDBLookupComboBox
-    Left = 132
-    Top = 395
+    Left = 136
+    Top = 499
     Width = 209
     Height = 25
     DataField = 'teachers_id'
@@ -177,8 +177,8 @@ object frmProgramDay: TfrmProgramDay
     TabOrder = 3
   end
   object DBCheckBox4: TDBCheckBox
-    Left = 298
-    Top = 509
+    Left = 302
+    Top = 613
     Width = 177
     Height = 17
     Caption = '  '#913#954#965#961#974#952#951#954#949' '#956#949' '#967#961#941#969#963#951
@@ -190,8 +190,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = DBCheckBox4Click
   end
   object DateTimePicker2: TDateTimePicker
-    Left = 706
-    Top = 395
+    Left = 710
+    Top = 499
     Width = 186
     Height = 25
     Date = 45968.000000000000000000
@@ -202,8 +202,8 @@ object frmProgramDay: TfrmProgramDay
     OnChange = DateTimePicker2Change
   end
   object DateTimePicker1: TDateTimePicker
-    Left = 706
-    Top = 440
+    Left = 710
+    Top = 544
     Width = 186
     Height = 25
     Date = 45981.000000000000000000
@@ -212,8 +212,8 @@ object frmProgramDay: TfrmProgramDay
     OnChange = DateTimePicker1Change
   end
   object DBCheckBox1: TDBCheckBox
-    Left = 612
-    Top = 513
+    Left = 616
+    Top = 617
     Width = 225
     Height = 17
     Caption = '  '#913#954#965#961#974#952#951#954#949' '#956#949' '#956#953#963#942' '#967#961#941#969#963#951
@@ -225,8 +225,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = DBCheckBox1Click
   end
   object DBCheckBox2: TDBCheckBox
-    Left = 40
-    Top = 509
+    Left = 44
+    Top = 613
     Width = 113
     Height = 17
     Caption = #913#960#959#965#963#943#945
@@ -280,8 +280,8 @@ object frmProgramDay: TfrmProgramDay
     TextHint = #919#924#917#929#927#924#919#925#921#913
   end
   object RLReport1: TRLReport
-    Left = -155
-    Top = 471
+    Left = 412
+    Top = 567
     Width = 794
     Height = 1123
     DataSource = dtsPrint
@@ -2044,8 +2044,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button2Click
   end
   object DBCheckBox3: TDBCheckBox
-    Left = 40
-    Top = 471
+    Left = 44
+    Top = 575
     Width = 113
     Height = 17
     Caption = #913#957#945#960#955#942#961#969#963#951
@@ -2065,8 +2065,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button3Click
   end
   object RLReport2: TRLReport
-    Left = 214
-    Top = 481
+    Left = 412
+    Top = 581
     Width = 794
     Height = 1123
     DataSource = dtsPrintCount
@@ -3826,8 +3826,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button4Click
   end
   object RLReport3: TRLReport
-    Left = 159
-    Top = 532
+    Left = 323
+    Top = 567
     Width = 794
     Height = 1123
     DataSource = dtsProgramKid
@@ -5662,8 +5662,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button5Click
   end
   object DBLookupComboBox3: TDBLookupComboBox
-    Left = 449
-    Top = 395
+    Left = 453
+    Top = 499
     Width = 71
     Height = 25
     DataField = 'cat_debit_id'
@@ -5674,8 +5674,8 @@ object frmProgramDay: TfrmProgramDay
     TabOrder = 22
   end
   object CheckBox1: TCheckBox
-    Left = 347
-    Top = 393
+    Left = 351
+    Top = 497
     Width = 17
     Height = 24
     TabOrder = 23
@@ -5691,8 +5691,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button6Click
   end
   object RLReport4: TRLReport
-    Left = 34
-    Top = 494
+    Left = 398
+    Top = 664
     Width = 794
     Height = 1123
     DataSource = DtSPrintSumTeacherByDate
@@ -7474,6 +7474,7 @@ object frmProgramDay: TfrmProgramDay
     Active = True
     AfterInsert = FDQuery1AfterInsert
     BeforePost = FDQuery1BeforePost
+    AfterPost = FDQuery1AfterPost
     OnNewRecord = FDQuery1NewRecord
     Connection = FDConnection1
     SQL.Strings = (

@@ -181,6 +181,7 @@ type
     procedure RLReport4BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand14BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand15BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure FDQuery1AfterPost(DataSet: TDataSet);
 
 
 
@@ -544,6 +545,7 @@ procedure TfrmProgramDay.DBNavigator1Click(Sender: TObject;
   Button: TNavigateBtn);
 begin
 frmprogramday.CheckBox1.Checked := False;
+
 end;
 
 procedure TfrmProgramDay.FDQuery1AfterInsert(DataSet: TDataSet);
@@ -553,6 +555,30 @@ begin
   FDQuery1.FieldByName('ora').AsDateTime := DateTimePicker2.Time;
   // Ορίζουμε ότι η απουσία αρχικά είναι 0 (Όχι απουσία)
   FDQuery1.FieldByName('absence').AsInteger := 0;
+end;
+
+procedure TfrmProgramDay.FDQuery1AfterPost(DataSet: TDataSet);
+var
+  Bkmk: TBookmark;
+begin
+  // Αποθήκευση της τρέχουσας θέσης για να μην "πηδήξει" ο κέρσορας
+  Bkmk := DataSet.GetBookmark;
+
+  // "Παγώνουμε" προσωρινά το Grid για να μην αναβοσβήνει στην οθόνη
+  DataSet.DisableControls;
+  try
+    // Κλείνουμε και ανοίγουμε το Query για να φέρει τα φρέσκα δεδομένα
+    DataSet.Close;
+    DataSet.Open;
+
+    // Επιστρέφουμε στη γραμμή που μόλις καταχωρήσαμε
+    if DataSet.BookmarkValid(Bkmk) then
+      DataSet.GotoBookmark(Bkmk);
+  finally
+    // Καθαρίζουμε τη μνήμη και "ξεπαγώνουμε" το Grid
+    DataSet.FreeBookmark(Bkmk);
+    DataSet.EnableControls;
+  end;
 end;
 
 procedure TfrmProgramDay.FDQuery1BeforePost(DataSet: TDataSet);

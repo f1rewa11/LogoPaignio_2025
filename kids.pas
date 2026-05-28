@@ -78,6 +78,9 @@ type
     FDQuery1Ergo_Teacher_id: TIntegerField;
     FDQuery1Logo_Teacher_id: TIntegerField;
     FDQuery1Psyco_Teacher_id: TIntegerField;
+    Label11: TLabel;
+    DBEdit4: TDBEdit;
+    FDQuery1name_for_receipt: TWideStringField;
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DateTimePicker1DropDown(Sender: TObject);

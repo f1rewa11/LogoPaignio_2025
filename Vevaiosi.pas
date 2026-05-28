@@ -10,7 +10,8 @@ uses
   Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Grids,
   Vcl.DBGrids, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.MySQL,
-  FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Vcl.Mask, Vcl.ExtCtrls;
+  FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Vcl.Mask, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, RLReport;
 
 type
   TfrmVevaiosi = class(TForm)
@@ -37,8 +38,62 @@ type
     qryKidsList: TFDQuery;
     dsKidsList: TDataSource;
     qryPsych: TFDQuery;
+    RLReport3: TRLReport;
+    RLBand9: TRLBand;
+    RLLabel10: TRLLabel;
+    RLLabel11: TRLLabel;
+    RLLabel14: TRLLabel;
+    RLBand10: TRLBand;
+    RLDraw3: TRLDraw;
+    RLBand11: TRLBand;
+    RLBand12: TRLBand;
+    RLLabel12: TRLLabel;
+    RLImage3: TRLImage;
+    RLLabel1: TRLLabel;
+    RLLabel2: TRLLabel;
+    RLLabel4: TRLLabel;
+    Button1: TButton;
+    qryReportHeader: TFDQuery;
+    RLLabel15: TRLLabel;
+    RLLabel16: TRLLabel;
+    RLLabel17: TRLLabel;
+    RLDBText3: TRLDBText;
+    RLDBText4: TRLDBText;
+    RLDBText6: TRLDBText;
+    lblTherapists1: TRLLabel;
+    lblEidikotites1: TRLLabel;
+    lblAdeies1: TRLLabel;
+    lblKidName: TRLLabel;
+    lblDuration: TRLLabel;
+    RLLabel3: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLLabel6: TRLLabel;
+    RLLabel7: TRLLabel;
+    RLLabel8: TRLLabel;
+    RLDBText1: TRLDBText;
+    RLDBText2: TRLDBText;
+    RLDBText5: TRLDBText;
+    RLDraw1: TRLDraw;
+    RLDraw2: TRLDraw;
+    lblTherapists2: TRLLabel;
+    lblEidikotites2: TRLLabel;
+    lblAdeies2: TRLLabel;
+    RLDraw4: TRLDraw;
+    RLDraw5: TRLDraw;
+    lblTherapists3: TRLLabel;
+    lblEidikotites3: TRLLabel;
+    RLLabel9: TRLLabel;
+    RLLabel13: TRLLabel;
+    RLLabel18: TRLLabel;
+    RLLabel19: TRLLabel;
+    RLDBText7: TRLDBText;
+    RLDBText8: TRLDBText;
+    RLDBText9: TRLDBText;
+    lblAdeies3: TRLLabel;
+    edtPsych: TLabeledEdit;
     procedure btnSearchClick1Click(Sender: TObject);
     procedure DBLookupComboBox2CloseUp(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -153,6 +208,83 @@ begin
   end;
 end;
 
+procedure TfrmVevaiosi.Button1Click(Sender: TObject);
+var TherapistsStr1, EidikotitesStr1, AdeiesStr1, TherapistsStr2, EidikotitesStr2, AdeiesStr2, TherapistsStr3, EidikotitesStr3, AdeiesStr3: string;
+// Συνάρτηση για να μεταφράζουμε το ID της ειδικότητας σε κείμενο
+  function GetSpecializationName(ID: Integer): string;
+  begin
+    case ID of
+      1: Result := 'ΛΟΓΟΘΕΡΑΠΕΥΤΡΙΑ';
+      2: Result := 'ΨΥΧΟΛΟΓΟΣ';
+      3: Result := 'ΕΡΓΟΘΕΡΑΠΕΥΤΡΙΑ/ΤΗΣ';
+      else Result := '';
+    end;
+  end;
+begin
+// 1. Ανοίγουμε το Query για να φέρει τα στοιχεία του συγκεκριμένου παιδιού
+  qryReportHeader.Close;
+  // Σιγουρέψου ότι το DBLookupComboBox2 είναι αυτό που έχει το ID του παιδιού
+  qryReportHeader.ParamByName('KidID').value := DBLookupComboBox2.KeyValue;
+  qryReportHeader.Open;
+
+  // 2. Αρχικοποιούμε τα Strings για να χτίσουμε τις λίστες
+  TherapistsStr1 := '';
+  EidikotitesStr1 := '';
+  AdeiesStr1 := '';
+  TherapistsStr2 := '';
+  EidikotitesStr2 := '';
+  AdeiesStr2 := '';
+  TherapistsStr3 := '';
+  EidikotitesStr3 := '';
+  AdeiesStr3 := '';
+
+  // --- ΕΛΕΓΧΟΣ ΓΙΑ ΕΡΓΟΘΕΡΑΠΕΙΑ ---
+  if not qryReportHeader.FieldByName('ErgoName').IsNull then
+  begin
+    TherapistsStr1 := qryReportHeader.FieldByName('ErgoName').AsString;
+    EidikotitesStr1 := GetSpecializationName(qryReportHeader.FieldByName('ErgoEidikotitaID').AsInteger);
+    AdeiesStr1 := qryReportHeader.FieldByName('ErgoAdeia').AsString;
+  end;
+
+  // --- ΕΛΕΓΧΟΣ ΓΙΑ ΨΥΧΟΛΟΓΙΑ ---
+  if not qryReportHeader.FieldByName('PsyName').IsNull then
+  begin
+    TherapistsStr2 := qryReportHeader.FieldByName('PsyName').AsString;
+    EidikotitesStr2 := GetSpecializationName(qryReportHeader.FieldByName('PsyEidikotitaID').AsInteger);
+    AdeiesStr2 := qryReportHeader.FieldByName('PsyAdeia').AsString;
+  end;
+
+  // --- ΕΛΕΓΧΟΣ ΓΙΑ ΛΟΓΟΘΕΡΑΠΕΙΑ ---
+  if not qryReportHeader.FieldByName('LogoName').IsNull then
+  begin
+    TherapistsStr3 := qryReportHeader.FieldByName('LogoName').AsString;
+    EidikotitesStr3 := GetSpecializationName(qryReportHeader.FieldByName('LogoEidikotitaID').AsInteger);
+    AdeiesStr3 := qryReportHeader.FieldByName('LogoAdeia').AsString;
+  end;
+
+  // 3. Ενημερώνουμε τα Labels στο FortesReport
+  lblTherapists1.Caption := TherapistsStr1;
+  lblEidikotites1.Caption := EidikotitesStr1;
+  lblAdeies1.Caption := AdeiesStr1;
+  lblTherapists2.Caption := TherapistsStr2;
+  lblEidikotites2.Caption := EidikotitesStr2;
+  lblAdeies2.Caption := AdeiesStr2;
+  lblTherapists3.Caption := TherapistsStr3;
+  lblEidikotites3.Caption := EidikotitesStr3;
+  lblAdeies3.Caption := AdeiesStr3;
+  RLLabel5.CAPTION := edtPsych.Text;
+
+  // Περνάμε το όνομα του παιδιού
+  lblKidName.Caption := qryReportHeader.FieldByName('name_for_receipt').AsString;
+
+  // Περνάμε τις ημερομηνίες από τα 2 ημερολόγια
+  lblDuration.Caption := DateToStr(DateTimePicker1.Date) + ' ΕΩΣ ' +
+                         DateToStr(DateTimePicker2.Date);
+
+  // 4. Εμφανίζουμε την αναφορά!
+ frmvevaiosi.RLReport3.preview;
+end;
+
 procedure TfrmVevaiosi.DBLookupComboBox2CloseUp(Sender: TObject);
 begin
 // Ελέγχουμε αν όντως επιλέχθηκε κάποιο παιδί (να μην είναι κενό)
@@ -165,14 +297,14 @@ begin
       DateTimePicker2.Date := qryKidsList.FieldByName('next_date').AsDateTime;
 
       // 2. Βάζουμε στο "Από" (Picker1) την ημερομηνία του Picker2 ΜΕΙΟΝ 30 ημέρες!
-      DateTimePicker1.Date := DateTimePicker2.Date - 30;
+      DateTimePicker1.Date := DateTimePicker2.Date - 29;
     end
     else
     begin
       // Προαιρετικά: Αν το παιδί ΔΕΝ έχει καταχωρημένη ημερομηνία ΑΠΥ,
       // βάζουμε ως "Έως" το σημερινό και ως "Από" 30 μέρες πίσω για ασφάλεια.
       DateTimePicker2.Date := Date;
-      DateTimePicker1.Date := Date - 30;
+      DateTimePicker1.Date := Date - 29;
     end;
   end;
 end;
