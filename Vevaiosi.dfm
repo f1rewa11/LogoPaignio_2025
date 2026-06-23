@@ -2,7 +2,7 @@
   Left = 0
   Top = 0
   Caption = #904#954#948#959#963#951' '#914#949#946#945#943#969#963#951#962' '#928#945#961#945#954#959#955#959#973#952#951#963#951#962
-  ClientHeight = 679
+  ClientHeight = 908
   ClientWidth = 958
   Color = clActiveCaption
   Font.Charset = DEFAULT_CHARSET
@@ -144,8 +144,8 @@
     OnClick = btnSearchClick1Click
   end
   object RLReport3: TRLReport
-    Left = 72
-    Top = 64
+    Left = 103
+    Top = 8
     Width = 794
     Height = 1123
     DataSource = dsReport
@@ -733,7 +733,7 @@
       Left = 38
       Top = 524
       Width = 718
-      Height = 19
+      Height = 111
       AutoSize = True
       BandType = btSummary
     end

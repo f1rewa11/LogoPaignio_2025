@@ -3826,8 +3826,8 @@ object frmProgramDay: TfrmProgramDay
     OnClick = Button4Click
   end
   object RLReport3: TRLReport
-    Left = 323
-    Top = 567
+    Left = 390
+    Top = 581
     Width = 794
     Height = 1123
     DataSource = dtsProgramKid

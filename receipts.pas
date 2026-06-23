@@ -104,6 +104,8 @@ type
     RLBand12: TRLBand;
     RLLabel13: TRLLabel;
     RLImage3: TRLImage;
+    DBCheckBox3: TDBCheckBox;
+    DBCheckBox1: TDBCheckBox;
 
     procedure DateTimePicker1Change(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);
@@ -117,6 +119,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure dtsNextAPYDataChange(Sender: TObject; Field: TField);
     procedure Button4Click(Sender: TObject);
+    procedure FDQuery1NewRecord(DataSet: TDataSet);
+    procedure FDQuery1AfterPost(DataSet: TDataSet);
 
 
   private
@@ -326,10 +330,42 @@ begin
     FDQuery1.FieldByName('amount').AsFloat := 0.0;
 end;
 
+procedure TfrmReceipts.FDQuery1AfterPost(DataSet: TDataSet);
+var
+  Bkmk: TBookmark;
+begin
+  // Αποθήκευση της τρέχουσας θέσης για να μην "πηδήξει" ο κέρσορας
+  Bkmk := DataSet.GetBookmark;
+
+  // "Παγώνουμε" προσωρινά το Grid για να μην αναβοσβήνει στην οθόνη
+  DataSet.DisableControls;
+  try
+    // Κλείνουμε και ανοίγουμε το Query για να φέρει τα φρέσκα δεδομένα
+    DataSet.Close;
+    DataSet.Open;
+
+    // Επιστρέφουμε στη γραμμή που μόλις καταχωρήσαμε
+    if DataSet.BookmarkValid(Bkmk) then
+      DataSet.GotoBookmark(Bkmk);
+  finally
+    // Καθαρίζουμε τη μνήμη και "ξεπαγώνουμε" το Grid
+    DataSet.FreeBookmark(Bkmk);
+    DataSet.EnableControls;
+  end;
+end;
+
 procedure TfrmReceipts.FDQuery1BeforePost(DataSet: TDataSet);
 begin
 if FDQuery1.State in [dsEdit, dsInsert] then
        FDQuery1.FieldByName('payment_date').AsDateTime := DateTimePicker1.Date;
+end;
+
+procedure TfrmReceipts.FDQuery1NewRecord(DataSet: TDataSet);
+begin
+// Θέτουμε αυτόματα την τιμή 0 (Unchecked) στα πεδία
+  // με το που πατάμε το κουμπί της νέας εγγραφής (+)
+  Dataset.FieldByName('apy').AsInteger := 0;
+  Dataset.FieldByName('tax').AsInteger := 0;
 end;
 
 procedure TfrmReceipts.FormClose(Sender: TObject; var Action: TCloseAction);

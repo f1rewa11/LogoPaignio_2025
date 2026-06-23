@@ -30,36 +30,36 @@ object frmReceipts: TfrmReceipts
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 120
-    Top = 491
+    Left = 16
+    Top = 483
     Width = 31
     Height = 17
     Caption = #928#945#953#948#943
   end
   object Label8: TLabel
-    Left = 690
-    Top = 483
+    Left = 650
+    Top = 481
     Width = 70
     Height = 17
     Caption = #919#956#949#961#959#956#951#957#943#945
   end
   object Label3: TLabel
-    Left = 120
-    Top = 577
+    Left = 16
+    Top = 569
     Width = 51
     Height = 17
     Caption = #928#959#963#972' ('#8364')'
   end
   object Label2: TLabel
-    Left = 120
-    Top = 533
+    Left = 16
+    Top = 525
     Width = 24
     Height = 17
     Caption = #913#928#933
   end
   object Label5: TLabel
-    Left = 538
-    Top = 514
+    Left = 652
+    Top = 506
     Width = 83
     Height = 17
     Caption = #928#945#961#945#964#951#961#942#963#949#953#962
@@ -80,8 +80,8 @@ object frmReceipts: TfrmReceipts
     TabOrder = 0
   end
   object DBLookupComboBox1: TDBLookupComboBox
-    Left = 210
-    Top = 483
+    Left = 106
+    Top = 475
     Width = 311
     Height = 25
     DataField = 'kid_id'
@@ -94,7 +94,7 @@ object frmReceipts: TfrmReceipts
   object DBGrid1: TDBGrid
     Left = 16
     Top = 155
-    Width = 1025
+    Width = 1075
     Height = 312
     DataSource = DataSource1
     ReadOnly = True
@@ -148,8 +148,8 @@ object frmReceipts: TfrmReceipts
       end>
   end
   object DateTimePicker1: TDateTimePicker
-    Left = 791
-    Top = 483
+    Left = 738
+    Top = 473
     Width = 186
     Height = 25
     Date = 45981.000000000000000000
@@ -158,8 +158,8 @@ object frmReceipts: TfrmReceipts
     OnChange = DateTimePicker1Change
   end
   object DBEdit1: TDBEdit
-    Left = 210
-    Top = 574
+    Left = 106
+    Top = 566
     Width = 71
     Height = 25
     DataField = 'amount'
@@ -167,8 +167,8 @@ object frmReceipts: TfrmReceipts
     TabOrder = 4
   end
   object DBEdit2: TDBEdit
-    Left = 210
-    Top = 530
+    Left = 106
+    Top = 522
     Width = 185
     Height = 25
     DataField = 'apy_number'
@@ -176,8 +176,8 @@ object frmReceipts: TfrmReceipts
     TabOrder = 5
   end
   object DBMemo1: TDBMemo
-    Left = 538
-    Top = 530
+    Left = 652
+    Top = 522
     Width = 439
     Height = 104
     DataField = 'notes'
@@ -1972,8 +1972,8 @@ object frmReceipts: TfrmReceipts
     TextHint = #919#924#917#929#927#924#919#925#921#913
   end
   object RLReport2: TRLReport
-    Left = 104
-    Top = 244
+    Left = 70
+    Top = 741
     Width = 794
     Height = 1123
     DataSource = dtsPrintSum
@@ -3769,7 +3769,7 @@ object frmReceipts: TfrmReceipts
   end
   object RLReport3: TRLReport
     Left = 319
-    Top = 561
+    Top = 751
     Width = 794
     Height = 1123
     DataSource = dtsNextAPY
@@ -5499,8 +5499,8 @@ object frmReceipts: TfrmReceipts
     OnClick = Button4Click
   end
   object RLReport1: TRLReport
-    Left = 224
-    Top = 561
+    Left = 211
+    Top = 741
     Width = 794
     Height = 1123
     DataSource = DtSBalance
@@ -7184,6 +7184,32 @@ object frmReceipts: TfrmReceipts
       end
     end
   end
+  object DBCheckBox3: TDBCheckBox
+    Left = 307
+    Top = 570
+    Width = 64
+    Height = 17
+    AllowGrayed = True
+    Caption = #934#927#929#927#931
+    DataField = 'tax'
+    DataSource = DataSource1
+    TabOrder = 18
+    ValueChecked = '1'
+    ValueUnchecked = '0'
+  end
+  object DBCheckBox1: TDBCheckBox
+    Left = 211
+    Top = 570
+    Width = 64
+    Height = 17
+    AllowGrayed = True
+    Caption = #913#928#933
+    DataField = 'apy'
+    DataSource = DataSource1
+    TabOrder = 19
+    ValueChecked = '1'
+    ValueUnchecked = '0'
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=MYDB'
@@ -7205,6 +7231,8 @@ object frmReceipts: TfrmReceipts
     Active = True
     AfterInsert = FDQuery1AfterInsert
     BeforePost = FDQuery1BeforePost
+    AfterPost = FDQuery1AfterPost
+    OnNewRecord = FDQuery1NewRecord
     ConstraintsEnabled = True
     Connection = FDConnection1
     SQL.Strings = (

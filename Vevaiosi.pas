@@ -11,7 +11,7 @@ uses
   Vcl.DBGrids, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.MySQL,
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Vcl.Mask, Vcl.ExtCtrls,
-  Vcl.Imaging.jpeg, RLReport;
+  Vcl.Imaging.jpeg, RLReport, System.ImageList, Vcl.ImgList;
 
 type
   TfrmVevaiosi = class(TForm)
